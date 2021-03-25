@@ -8,3 +8,13 @@
 .ant-form-item {
   margin-bottom: 0 !important;
 }
+
+.ant-btn-loading {
+  background: rgba(39, 88, 144, 1) !important;
+  &::before {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+input:-internal-autofill-selected {
+  background-color: white !important;
+}

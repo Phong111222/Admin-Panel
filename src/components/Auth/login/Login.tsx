@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Row, Col, Form, Input, Button, Typography } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useForm } from 'antd/lib/form/Form';
+import { useDispatch } from 'react-redux';
 // const labelStyle = {
 //   textAlign: 'center',
 //   margin: '10px 0',
@@ -10,12 +12,30 @@ import { Link } from 'react-router-dom';
 //   color: 'white',
 // };
 
+const colResponsive = {
+  xs: {
+    span: 24,
+  },
+  md: {
+    span: 12,
+  },
+  lg: {
+    span: 10,
+  },
+};
+
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const [loginForm] = useForm();
+  const [loading, setLoading] = useState<boolean>(false);
+  const handleFinish = (value: { email: string; password: string }) => {
+    console.log(value);
+  };
   return (
     <>
       <div style={{ background: '#428AD5', height: '100vh' }}>
-        <Row justify='center' align='middle' style={{ height: '80vh' }}>
-          <Col span={10}>
+        <Row justify='center' align='middle' style={{ height: '100vh' }}>
+          <Col {...colResponsive}>
             <Card
               style={{
                 width: '100%',
@@ -25,11 +45,19 @@ const Login: React.FC = () => {
               }}
               bordered={false}>
               <div style={{ textAlign: 'center' }}>
-                <Typography.Title style={{ color: 'white' }}>
+                <Typography.Title
+                  style={{
+                    color: 'white',
+                    textShadow:
+                      '0px 1px 2px -2px rgb(0 0 0 / 16%),0 3px 6px 0 rgb(0 0 0 / 12%),0 5px 12px 4px rgb(0 0 0 / 9%)',
+                  }}>
                   ADMIN PANEL
                 </Typography.Title>
               </div>
-              <Form labelCol={{ span: 24 }}>
+              <Form
+                form={loginForm}
+                labelCol={{ span: 24 }}
+                onFinish={handleFinish}>
                 <Row>
                   <Col span={24}>
                     <Row>
@@ -41,6 +69,7 @@ const Login: React.FC = () => {
                             fontSize: 15,
                             fontWeight: 600,
                             color: 'white',
+                            textShadow: '5px 0 3px rgb(0 0 0 / 20%)',
                           }}>
                           E-MAIL
                         </div>
@@ -54,6 +83,10 @@ const Login: React.FC = () => {
                                 {
                                   required: true,
                                   message: 'please input your email',
+                                },
+                                {
+                                  type: 'email',
+                                  message: 'invalid Email',
                                 },
                               ]}>
                               <Input
@@ -82,6 +115,7 @@ const Login: React.FC = () => {
                             fontSize: 15,
                             fontWeight: 600,
                             color: 'white',
+                            textShadow: '5px 0 3px rgb(0 0 0 / 20%)',
                           }}>
                           PASSWORD
                         </div>
@@ -95,6 +129,11 @@ const Login: React.FC = () => {
                                 {
                                   required: true,
                                   message: 'please input your password',
+                                },
+                                {
+                                  min: 8,
+                                  message:
+                                    'password must contain at least 8 characters',
                                 },
                               ]}>
                               <Input.Password
@@ -122,8 +161,7 @@ const Login: React.FC = () => {
                             textTransform: 'uppercase',
                             fontSize: 15,
                             fontWeight: 500,
-                            textShadow:
-                              '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
+                            textShadow: '5px 0 3px rgb(0 0 0 / 20%)',
                           }}>
                           Register
                         </Link>
@@ -147,7 +185,8 @@ const Login: React.FC = () => {
                             border: 'none',
                             boxShadow:
                               '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
-                          }}>
+                          }}
+                          loading={loading}>
                           LOGIN
                         </Button>
                       </Col>
