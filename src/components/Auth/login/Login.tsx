@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Row, Col, Form, Input, Button, Typography } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'antd/lib/form/Form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/RootReducer';
+import { AuthState } from '../../../store/Auth/types';
+import { login } from '../../../store/Auth/actions';
 // const labelStyle = {
 //   textAlign: 'center',
 //   margin: '10px 0',
@@ -26,11 +29,13 @@ const colResponsive = {
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [loginForm] = useForm();
-  const [loading, setLoading] = useState<boolean>(false);
+  const AuthState = useSelector<RootState, AuthState>((state) => state.Auth);
   const handleFinish = (value: { email: string; password: string }) => {
-    console.log(value);
+    dispatch(login(value, history));
   };
+
   return (
     <>
       <div style={{ background: '#428AD5', height: '100vh' }}>
@@ -53,6 +58,13 @@ const Login: React.FC = () => {
                   }}>
                   ADMIN PANEL
                 </Typography.Title>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <img
+                  src='/logo.png'
+                  alt='ADMIN PANEL LOGO'
+                  style={{ width: '30%' }}
+                />
               </div>
               <Form
                 form={loginForm}
@@ -163,7 +175,7 @@ const Login: React.FC = () => {
                             fontWeight: 500,
                             textShadow: '5px 0 3px rgb(0 0 0 / 20%)',
                           }}>
-                          Register
+                          SIGN UP
                         </Link>
                       </Col>
                     </Row>
@@ -186,7 +198,7 @@ const Login: React.FC = () => {
                             boxShadow:
                               '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
                           }}
-                          loading={loading}>
+                          loading={AuthState.sending_login}>
                           LOGIN
                         </Button>
                       </Col>

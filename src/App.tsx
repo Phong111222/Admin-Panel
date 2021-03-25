@@ -1,12 +1,22 @@
 import React from 'react';
 import MakeRoute from './Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import persistStore from 'redux-persist/es/persistStore';
+import { PersistGate } from 'redux-persist/integration/react';
+
+const peristor = persistStore(store);
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <MakeRoute />
-    </Router>
+    <Provider store={store}>
+      <PersistGate persistor={peristor} loading={<>loading</>}>
+        <Router>
+          <MakeRoute />
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 };
 

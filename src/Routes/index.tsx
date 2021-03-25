@@ -23,6 +23,18 @@ const routes: type[] = [
     id: 'login',
     exact: true,
   },
+  {
+    name: 'register',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/Auth/register/Register'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/register',
+    id: 'register',
+    exact: true,
+  },
 ];
 const MakeRoute = () => (
   <React.Suspense fallback={<>Loading</>}>
@@ -36,7 +48,7 @@ const MakeRoute = () => (
         />
       ))}
       ))
-      <Redirect from='/' to='/home' />
+      <Redirect from='/' to='/login' />
     </Switch>
   </React.Suspense>
 );
