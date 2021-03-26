@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <div style={{ background: '#428AD5', height: '100vh' }}>
+      <div style={{ background: '#297dd6', height: '100vh' }}>
         <Row justify='center' align='middle' style={{ height: '100vh' }}>
           <Col {...colResponsive}>
             <Card
@@ -47,6 +47,7 @@ const Login: React.FC = () => {
                 background: '#428ad5',
                 boxShadow:
                   '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
+                borderRadius: 15,
               }}
               bordered={false}>
               <div style={{ textAlign: 'center' }}>
@@ -71,7 +72,7 @@ const Login: React.FC = () => {
                 labelCol={{ span: 24 }}
                 onFinish={handleFinish}>
                 <Row>
-                  <Col span={24}>
+                  <Col span={24} style={{ marginTop: 15 }}>
                     <Row>
                       <Col span={24}>
                         <div
@@ -117,7 +118,7 @@ const Login: React.FC = () => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col span={24}>
+                  <Col span={24} style={{ marginBottom: 15 }}>
                     <Row>
                       <Col span={24}>
                         <div
@@ -163,7 +164,7 @@ const Login: React.FC = () => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col span={24} style={{ margin: '10px 0' }}>
+                  {/* <Col span={24} style={{ margin: '10px 0' }}>
                     <Row justify='center'>
                       <Col span={18}>
                         <Link
@@ -179,8 +180,8 @@ const Login: React.FC = () => {
                         </Link>
                       </Col>
                     </Row>
-                  </Col>
-                  <Col span={24}>
+                  </Col> */}
+                  <Col span={24} style={{ margin: '15px 0' }}>
                     <Row justify='center'>
                       <Col span={18}>
                         <Button

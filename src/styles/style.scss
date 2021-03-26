@@ -1,9 +1,12 @@
 .ant-form-item-explain.ant-form-item-explain-error {
   // min-height: 18px !important;
+
   div[role='alert'] {
-    color: rgba(235, 21, 21, 0.938);
+    color: rgb(187, 36, 36);
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 5px;
   }
 }
 // .ant-form-item {
