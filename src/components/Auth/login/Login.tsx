@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col, Form, Input, Button, Typography } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'antd/lib/form/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
