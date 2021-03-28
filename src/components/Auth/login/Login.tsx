@@ -60,11 +60,15 @@ const Login: React.FC = () => {
                   ADMIN PANEL
                 </Typography.Title>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}>
                 <img
                   src='/logo.png'
                   alt='ADMIN PANEL LOGO'
-                  style={{ width: '30%' }}
+                  style={{ maxWidth: '30%' }}
                 />
               </div>
               <Form

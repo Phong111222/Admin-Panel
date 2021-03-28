@@ -67,7 +67,7 @@ const Register: React.FC = () => {
                 <img
                   src='/logo.png'
                   alt='ADMIN PANEL LOGO'
-                  style={{ width: '30%' }}
+                  style={{ maxWidth: '30%' }}
                 />
               </div>
               <Form
