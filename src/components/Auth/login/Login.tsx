@@ -68,7 +68,7 @@ const Login: React.FC = () => {
                 <img
                   src='/logo.png'
                   alt='ADMIN PANEL LOGO'
-                  style={{ maxWidth: '5%' }}
+                  style={{ maxWidth: '5%', height: 'auto' }}
                 />
               </div>
               <Form
