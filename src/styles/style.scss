@@ -1,3 +1,4 @@
+@import './variable';
 .ant-form-item-explain.ant-form-item-explain-error {
   // min-height: 18px !important;
 
@@ -25,4 +26,23 @@ input:-internal-autofill-selected {
 img {
   width: 100%;
   height: auto;
+}
+.ant-layout-sider-dark {
+  background: $darkBlue !important;
+}
+.ant-layout-sider-light {
+  background: $lightBlue !important;
+}
+.ant-menu-dark {
+  background: $darkBlue !important;
+}
+.ant-menu-light {
+  background: $lightBlue !important;
+}
+.ant-menu-submenu.ant-menu-submenu-inline {
+  background: $lightBlue;
+  .ant-menu-submenu-title {
+    background: $lightBlue;
+    margin: 0;
+  }
 }

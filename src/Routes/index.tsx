@@ -35,6 +35,18 @@ const routes: type[] = [
     id: 'register',
     exact: true,
   },
+  {
+    name: 'home',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/Auth/register/Register'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/register',
+    id: 'home',
+    exact: true,
+  },
 ];
 const MakeRoute = () => (
   <React.Suspense fallback={<>Loading</>}>
