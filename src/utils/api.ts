@@ -8,3 +8,7 @@ export const postHttp = (
 ) => {
   return AxiosConfig.post(url, data, config);
 };
+
+export const getHttpRequest = (url: string, config?: AxiosRequestConfig) => {
+  return AxiosConfig.get(url, config);
+};

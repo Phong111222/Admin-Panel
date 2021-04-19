@@ -3,6 +3,7 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { STAFF_FEATURE } from './Routes';
 import Logo from '../../Logo';
+
 interface Props {
   children: React.ReactNode;
 }
@@ -30,7 +31,7 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
             padding: '10px 0',
           }}
         >
-          <Logo width={80} height={80} />
+          <Logo width={collapsed ? 65 : 80} height={collapsed ? 65 : 80} />
         </div>
         <Menu theme='dark' mode='inline'>
           <SubMenu title='Staff' icon={<UserOutlined />}>
@@ -42,6 +43,26 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
           </SubMenu>
         </Menu>
       </Sider>
+      <Layout>
+        <Header>show user icon </Header>
+
+        <Breadcrumb style={{ margin: '15px 30px' }}>
+          <Breadcrumb.Item>User</Breadcrumb.Item>
+          <Breadcrumb.Item>Bill</Breadcrumb.Item>
+        </Breadcrumb>
+
+        <Content style={{ margin: '0 30px' }}>{children}</Content>
+        <Footer
+          style={{
+            height: 48,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          ADMIN PANEL
+        </Footer>
+      </Layout>
     </Layout>
   );
 };

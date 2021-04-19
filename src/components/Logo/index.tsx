@@ -8,7 +8,7 @@ interface Props {
 const Logo: React.FC<Props> = ({ height = 100, width = 100, src }) => {
   return (
     <>
-      <img src={src ? src : '/logo.png'} style={{ height, width }} />
+      <img src={src ? src : '/logo.png'} style={{ height, width }} alt='logo' />
     </>
   );
 };

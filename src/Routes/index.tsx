@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import WrappedLayout from '../components/app/WrappedLayout';
 
 interface type {
   name: string;
@@ -39,11 +40,11 @@ const routes: type[] = [
     name: 'home',
     component: React.lazy(() =>
       Promise.all([
-        import('../components/Auth/register/Register'),
+        import('../components/app/Home'),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/register',
+    path: '/',
     id: 'home',
     exact: true,
   },
@@ -56,7 +57,15 @@ const MakeRoute = () => (
           exact={route.exact || false}
           path={route.path}
           key={route.id}
-          component={route.component}
+          component={() =>
+            route.id === 'login' || 'register' ? (
+              <route.component />
+            ) : (
+              <WrappedLayout>
+                <route.component />
+              </WrappedLayout>
+            )
+          }
         />
       ))}
       ))

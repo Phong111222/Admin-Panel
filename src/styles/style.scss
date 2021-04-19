@@ -46,3 +46,28 @@ img {
     margin: 0;
   }
 }
+.ant-menu.ant-menu-sub.ant-menu-inline[role='menu'] {
+  background: #3781cc;
+}
+
+.ant-menu-item[role='menuitem'] {
+  color: white;
+}
+.ant-menu-submenu-popup {
+  display: none;
+}
+
+.ant-menu-inline-collapsed {
+  background: $lightBlue !important;
+}
+.ant-layout-sider-trigger {
+  background: #3781cc !important;
+  span[role='img'] {
+    svg {
+      fill: white;
+    }
+  }
+}
+.ant-layout-header {
+  background: $darkBlue;
+}

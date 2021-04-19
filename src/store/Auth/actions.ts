@@ -17,13 +17,17 @@ export const login = (
       data: {
         data: { token },
       },
-    } = await postHttp(Auth.LOGIN, data, {
-      headers: {
-        Authorization: `Basic ${encode(
-          `${BasicAuth.basicauth_user}:${BasicAuth.basicauth_password}`
-        )}`,
-      },
-    });
+    } = await postHttp(
+      Auth.LOGIN,
+      { ...data, role: 'dev' },
+      {
+        headers: {
+          Authorization: `Basic ${encode(
+            `${BasicAuth.basicauth_user}:${BasicAuth.basicauth_password}`
+          )}`,
+        },
+      }
+    );
     typeof window !== 'undefined' &&
       window.localStorage.setItem('token', token);
     dispatch({ type: AuthActionTypes.LOGIN_SUCCESS });

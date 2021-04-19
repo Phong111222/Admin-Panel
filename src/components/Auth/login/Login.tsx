@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <div style={{ background: '#297dd6', height: '100vh' }}>
+      <div style={{ background: '#297dd6', minHeight: '100vh' }}>
         <Row justify='center' align='middle' style={{ height: '100vh' }}>
           <Col {...colResponsive}>
             <Card
@@ -49,14 +49,16 @@ const Login: React.FC = () => {
                   '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
                 borderRadius: 15,
               }}
-              bordered={false}>
+              bordered={false}
+            >
               <div style={{ textAlign: 'center' }}>
                 <Typography.Title
                   style={{
                     color: 'white',
                     textShadow:
                       '0px 1px 2px -2px rgb(0 0 0 / 16%),0 3px 6px 0 rgb(0 0 0 / 12%),0 5px 12px 4px rgb(0 0 0 / 9%)',
-                  }}>
+                  }}
+                >
                   ADMIN PANEL
                 </Typography.Title>
               </div>
@@ -64,7 +66,8 @@ const Login: React.FC = () => {
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
-                }}>
+                }}
+              >
                 <img
                   src='/logo.png'
                   alt='ADMIN PANEL LOGO'
@@ -74,7 +77,8 @@ const Login: React.FC = () => {
               <Form
                 form={loginForm}
                 labelCol={{ span: 24 }}
-                onFinish={handleFinish}>
+                onFinish={handleFinish}
+              >
                 <Row>
                   <Col span={24} style={{ marginTop: 15 }}>
                     <Row>
@@ -87,7 +91,8 @@ const Login: React.FC = () => {
                             fontWeight: 600,
                             color: 'white',
                             textShadow: '5px 0 3px rgb(0 0 0 / 20%)',
-                          }}>
+                          }}
+                        >
                           E-MAIL
                         </div>
                       </Col>
@@ -105,7 +110,8 @@ const Login: React.FC = () => {
                                   type: 'email',
                                   message: 'invalid Email',
                                 },
-                              ]}>
+                              ]}
+                            >
                               <Input
                                 placeholder='EMAIL'
                                 style={{
@@ -133,7 +139,8 @@ const Login: React.FC = () => {
                             fontWeight: 600,
                             color: 'white',
                             textShadow: '5px 0 3px rgb(0 0 0 / 20%)',
-                          }}>
+                          }}
+                        >
                           PASSWORD
                         </div>
                       </Col>
@@ -152,7 +159,8 @@ const Login: React.FC = () => {
                                   message:
                                     'password must contain at least 8 characters',
                                 },
-                              ]}>
+                              ]}
+                            >
                               <Input.Password
                                 placeholder='PASSWORD'
                                 style={{
@@ -203,7 +211,8 @@ const Login: React.FC = () => {
                             boxShadow:
                               '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
                           }}
-                          loading={AuthState.sending_login}>
+                          loading={AuthState.sending_login}
+                        >
                           LOGIN
                         </Button>
                       </Col>

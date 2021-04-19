@@ -7,3 +7,7 @@ export const Auth = {
   LOGIN: '/auth/login',
   REGISTER: '/auth/register',
 };
+
+export const User = {
+  user_info: '/user/getCurrent',
+};

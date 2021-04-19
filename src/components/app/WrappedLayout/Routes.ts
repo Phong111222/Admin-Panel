@@ -1,5 +1,5 @@
 import { UserAddOutlined, OrderedListOutlined } from '@ant-design/icons';
-import React from 'react';
+
 export const STAFF_FEATURE = [
   {
     path: '/staff/create-staff',
