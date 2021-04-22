@@ -6,6 +6,7 @@ export const AuthActionTypes = {
   SENDING_REGISTER: 'SENDING_REGISTER',
   REGISTER_FAIL: 'REGISTER_FAIL',
   REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+  RESET_AUTH: 'RESET_AUTH',
 };
 
 export interface AuthState {

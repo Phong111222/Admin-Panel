@@ -1,15 +1,15 @@
 import { Reducer } from 'redux';
 import { AuthActions, AuthActionTypes, AuthState } from './types';
-
-const AuthReducer: Reducer<AuthState, AuthActions> = (
-  state = {
-    sending_login: false,
-    sending_register: false,
-    message: {
-      login_success: false,
-      register_success: false,
-    },
+const initialState = {
+  sending_login: false,
+  sending_register: false,
+  message: {
+    login_success: false,
+    register_success: false,
   },
+};
+const AuthReducer: Reducer<AuthState, AuthActions> = (
+  state = initialState,
   action
 ) => {
   switch (action.type) {
@@ -49,6 +49,8 @@ const AuthReducer: Reducer<AuthState, AuthActions> = (
           register_success: true,
         },
       };
+    case AuthActionTypes.RESET_AUTH:
+      return { ...initialState };
     default:
       return state;
   }

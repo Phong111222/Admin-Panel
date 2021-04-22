@@ -2,10 +2,7 @@ import { Reducer } from 'redux';
 import { UserAction, UserState, UserTypes } from './types';
 
 const initialState: UserState = {
-  role: {
-    loading: false,
-    name: '',
-  },
+  role: '',
   isAuthenticated: false,
   permission: [],
   user: {
@@ -13,7 +10,7 @@ const initialState: UserState = {
     info: null,
   },
 };
-const Reducer: Reducer<UserState, UserAction> = (
+const UserReducer: Reducer<UserState, UserAction> = (
   state = initialState,
   action
 ) => {
@@ -23,17 +20,13 @@ const Reducer: Reducer<UserState, UserAction> = (
     case UserTypes.GET_USER_COMPLETE:
       return {
         ...state,
+        role: action.payload?.user.role,
         user: { ...state.user, loading: false, info: action.payload?.user },
       };
-    case UserTypes.GET_USER_ROLE:
-      return { ...state, role: { ...state.role, loading: true } };
-    case UserTypes.GET_USER_ROLE_COMPLETE:
-      return {
-        ...state,
-        role: { ...state.role, loading: false, name: action.payload?.role },
-      };
+    case UserTypes.RESET_USER:
+      return { ...initialState };
     default:
       return state;
   }
 };
-export default Reducer;
+export default UserReducer;

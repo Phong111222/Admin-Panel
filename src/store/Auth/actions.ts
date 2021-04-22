@@ -4,11 +4,19 @@ import { Auth, BasicAuth } from '../../utils/contanst';
 import { AuthActions, AuthActionTypes } from './types';
 import { encode } from 'js-base64';
 import { notification } from 'antd';
+import { UserAction } from '../user/types';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from '../RootReducer';
+import { GetInfoUser } from '../user/actions';
 
 export const login = (
   data: { email: string; password: string },
   history: any
-) => async (dispatch: Dispatch<AuthActions>) => {
+) => async (
+  dispatch: Dispatch<
+    AuthActions | ThunkAction<void, RootState, any, UserAction>
+  >
+) => {
   try {
     dispatch({
       type: AuthActionTypes.SENDING_LOGIN,
@@ -31,6 +39,7 @@ export const login = (
     typeof window !== 'undefined' &&
       window.localStorage.setItem('token', token);
     dispatch({ type: AuthActionTypes.LOGIN_SUCCESS });
+    dispatch(GetInfoUser());
     notification.success({
       message: 'LOGIN SUCCESS',
       duration: 3,
@@ -100,4 +109,10 @@ export const register = (
       onClose: () => notification.destroy(),
     });
   }
+};
+
+export const logout = () => {
+  return {
+    type: AuthActionTypes.RESET_AUTH,
+  };
 };

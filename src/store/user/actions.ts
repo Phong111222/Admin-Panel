@@ -12,9 +12,27 @@ export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
       typeof window !== 'undefined'
         ? window.localStorage.getItem('token')
         : null;
-    const response = getHttpRequest(User.user_info, {
-      headers: `Bearer ${token}`,
+    const {
+      data: {
+        data: { userInfo },
+      },
+    } = await getHttpRequest(User.user_info, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
-    console.log(response);
+
+    dispatch({
+      type: UserTypes.GET_USER_COMPLETE,
+      payload: {
+        user: userInfo,
+      },
+    });
   } catch (error) {}
+};
+
+export const ResetUser = () => {
+  return {
+    type: UserTypes.RESET_USER,
+  };
 };
