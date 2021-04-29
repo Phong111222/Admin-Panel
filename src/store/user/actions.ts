@@ -14,7 +14,7 @@ export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
         : null;
     const {
       data: {
-        data: { userInfo },
+        data: { userInfo, methods, routes, role },
       },
     } = await getHttpRequest(User.user_info, {
       headers: {
@@ -26,6 +26,9 @@ export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
       type: UserTypes.GET_USER_COMPLETE,
       payload: {
         user: userInfo,
+        methods,
+        role,
+        routes,
       },
     });
   } catch (error) {}

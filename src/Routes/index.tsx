@@ -61,6 +61,30 @@ const routes: type[] = [
     id: 'home',
     exact: true,
   },
+  {
+    name: 'product',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Product/ListProducts'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/product/list',
+    id: 'products_list',
+    exact: true,
+  },
+  {
+    name: 'product',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Product/CreateProduct'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/product/create',
+    id: 'products_create',
+    exact: true,
+  },
 ];
 
 const MakeRoute = () => {

@@ -2,9 +2,15 @@ import { Reducer } from 'redux';
 import { UserAction, UserState, UserTypes } from './types';
 
 const initialState: UserState = {
-  role: '',
+  role: {
+    id: '',
+    name: '',
+  },
   isAuthenticated: false,
-  permission: [],
+  permissions: {
+    methods: [],
+    routes: [],
+  },
   user: {
     loading: false,
     info: null,
@@ -20,7 +26,15 @@ const UserReducer: Reducer<UserState, UserAction> = (
     case UserTypes.GET_USER_COMPLETE:
       return {
         ...state,
-        role: action.payload?.user.role,
+        role: {
+          id: action.payload?.user.role as string,
+          name: action.payload?.role as string,
+        },
+
+        permissions: {
+          routes: action.payload?.routes as string[],
+          methods: action.payload?.methods as string[],
+        },
         user: { ...state.user, loading: false, info: action.payload?.user },
       };
     case UserTypes.RESET_USER:

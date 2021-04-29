@@ -5,10 +5,16 @@ export const UserTypes = {
 };
 
 export interface UserState {
-  role: string;
+  role: {
+    id: string;
+    name: string;
+  };
 
   isAuthenticated: boolean;
-  permission: [];
+  permissions: {
+    methods: string[];
+    routes: string[];
+  };
   user: {
     loading: boolean;
     info: any;
@@ -17,6 +23,9 @@ export interface UserState {
 
 export interface UserPayload {
   user?: any;
+  methods?: string[];
+  routes?: string[];
+  role?: string;
 }
 
 export interface UserAction {

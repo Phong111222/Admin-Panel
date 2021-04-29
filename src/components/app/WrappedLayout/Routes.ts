@@ -1,16 +1,41 @@
-import { UserAddOutlined, OrderedListOutlined } from '@ant-design/icons';
+import {
+  UserAddOutlined,
+  OrderedListOutlined,
+  CarOutlined,
+  TagOutlined,
+} from '@ant-design/icons';
 
-export const STAFF_FEATURE = [
+export const ROUTES = [
   {
-    path: '/staff/create-staff',
-    id: 'create-staff',
-    title: 'create staff',
-    icon: UserAddOutlined,
+    route: 'Products',
+    icon: CarOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Products list',
+        path: '/product/list',
+      },
+      {
+        httpRequest: 'POST',
+        title: 'Create product',
+        path: '/product/create',
+      },
+    ],
   },
   {
-    path: '/staff/list-staff',
-    id: 'list-staff',
-    title: 'staff list',
-    icon: OrderedListOutlined,
+    route: 'Category',
+    icon: TagOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Category list',
+        path: '/category/list',
+      },
+      {
+        httpRequest: 'POST',
+        title: 'Create category',
+        path: '/category/create',
+      },
+    ],
   },
 ];

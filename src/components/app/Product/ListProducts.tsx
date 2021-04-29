@@ -2,12 +2,8 @@ import { FC } from 'react';
 import WrappedAuth from '../WrappedAuth';
 import WrappedLayout from '../WrappedLayout';
 
-const Home: FC = () => {
-  return (
-    <WrappedAuth>
-      <div>Home</div>
-    </WrappedAuth>
-  );
+const ListProduct: FC = () => {
+  return <WrappedAuth>list Products</WrappedAuth>;
 };
 
-export default Home;
+export default ListProduct;
