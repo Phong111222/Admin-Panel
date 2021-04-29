@@ -11,7 +11,7 @@ const LogOut = () => {
     dispatch(ResetUser());
     dispatch(logout());
     window.localStorage.removeItem('token');
-    history.push('/login');
+    window.location.replace('/');
     // eslint-disable-next-line
   }, []);
 

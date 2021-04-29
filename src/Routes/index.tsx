@@ -13,18 +13,18 @@ interface type {
 }
 
 const routes: type[] = [
-  {
-    name: 'login',
-    component: React.lazy(() =>
-      Promise.all([
-        import('../components/Auth/login/Login'),
-        new Promise((resolve) => setTimeout(resolve, 100)),
-      ]).then(([moduleExports]) => moduleExports)
-    ),
-    path: '/login',
-    id: 'login',
-    exact: true,
-  },
+  // {
+  //   name: 'login',
+  //   component: React.lazy(() =>
+  //     Promise.all([
+  //       import('../components/Auth/login/Login'),
+  //       new Promise((resolve) => setTimeout(resolve, 100)),
+  //     ]).then(([moduleExports]) => moduleExports)
+  //   ),
+  //   path: '/login',
+  //   id: 'login',
+  //   exact: true,
+  // },
   {
     name: 'register',
     component: React.lazy(() =>
@@ -57,7 +57,7 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/',
+    path: '/home',
     id: 'home',
     exact: true,
   },
@@ -97,20 +97,12 @@ const MakeRoute = () => {
             exact={route.exact || false}
             path={route.path}
             key={route.id}
-            component={() =>
-              route.id === 'login' || 'register' ? (
-                <route.component />
-              ) : (
-                <WrappedLayout>
-                  <route.component />
-                </WrappedLayout>
-              )
-            }
+            component={() => <route.component />}
           />
         ))}
         ))
       </Switch>
-      {!jwt ? <Redirect from='/' to='/login' /> : <Redirect to='/' />}
+      {!jwt ? <Redirect from='/home' to='/login' /> : <Redirect to='/home' />}
     </React.Suspense>
   );
 };

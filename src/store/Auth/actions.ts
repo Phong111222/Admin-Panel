@@ -45,7 +45,7 @@ export const login = (
       duration: 3,
       onClose: () => {
         notification.destroy();
-        history.push('/');
+        window.location.replace('/home');
       },
     });
   } catch (errors) {

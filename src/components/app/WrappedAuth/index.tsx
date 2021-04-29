@@ -10,7 +10,7 @@ interface Props {
 const WrappedAuth: FC<Props> = ({ children }) => {
   const jwtAuth = useAuth();
   const history = useHistory();
-  console.log('Phong');
+
   useEffect(() => {
     if (!jwtAuth) {
       history.push('/logout');
@@ -21,7 +21,7 @@ const WrappedAuth: FC<Props> = ({ children }) => {
       const currentDate = Date.now();
       const jwt_decoded = jwt_decode<{ exp: number; iat: number }>(jwtAuth);
       if (jwt_decoded.exp * 1000 < currentDate) {
-        history.push('/logout');
+        history.replace('/logout');
       }
     }
     // eslint-disable-next-line

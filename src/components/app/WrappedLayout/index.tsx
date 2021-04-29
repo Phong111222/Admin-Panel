@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Button } from 'antd';
 
 import { ROUTES } from './Routes';
 import Logo from '../../Logo';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
 import { UserState } from '../../../store/user/types';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -18,7 +18,7 @@ const { SubMenu } = Menu;
 
 const WrappedLayout: React.FC<Props> = ({ children }) => {
   const { pathname } = useLocation();
-
+  const history = useHistory();
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const handleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -65,47 +65,56 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
     ));
   };
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={handleCollapsed}
-        theme='light'>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '10px 0',
-          }}>
-          <Logo width={collapsed ? 65 : 80} height={collapsed ? 65 : 80} />
-        </div>
-        <Menu theme='dark' mode='inline'>
-          {makeRoute(makeLegalRoute())}
-        </Menu>
-      </Sider>
-      <Layout>
-        <Header>show user icon </Header>
+    <>
+      <Button
+        onClick={() => {
+          history.push('/logout');
+        }}>
+        click
+      </Button>
 
-        <Breadcrumb style={{ margin: '15px 30px' }} separator='>'>
-          {pathname.length === 1
-            ? null
-            : pathname
-                .split('/')
-                .map((item) => <Breadcrumb.Item>{item}</Breadcrumb.Item>)}
-        </Breadcrumb>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={handleCollapsed}
+          theme='light'>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '10px 0',
+            }}>
+            <Logo width={collapsed ? 65 : 80} height={collapsed ? 65 : 80} />
+          </div>
+          <Menu theme='dark' mode='inline'>
+            {makeRoute(makeLegalRoute())}
+          </Menu>
+        </Sider>
+        <Layout>
+          <Header>show user icon </Header>
 
-        <Content style={{ margin: '0 30px' }}>{children}</Content>
-        <Footer
-          style={{
-            height: 48,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          ADMIN PANEL
-        </Footer>
+          <Breadcrumb style={{ margin: '15px 30px' }} separator='>'>
+            {pathname.length === 1
+              ? null
+              : pathname
+                  .split('/')
+                  .map((item) => <Breadcrumb.Item>{item}</Breadcrumb.Item>)}
+          </Breadcrumb>
+
+          <Content style={{ margin: '0 30px' }}>{children}</Content>
+          <Footer
+            style={{
+              height: 48,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            ADMIN PANEL
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </>
   );
 };
 
