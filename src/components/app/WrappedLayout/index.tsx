@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Layout, Menu, Breadcrumb, Button } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Layout, Menu, Breadcrumb } from 'antd';
 
 import { ROUTES } from './Routes';
 import Logo from '../../Logo';
@@ -26,6 +26,12 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
   const {
     permissions: { methods, routes },
   } = useSelector<RootState, UserState>((state) => state.user);
+
+  useEffect(() => {
+    if (pathname === '/login') {
+      history.replace('/home');
+    }
+  }, [pathname, history]);
 
   const makeLegalRoute = () => {
     // const methodsTest = ['POST'];
@@ -64,15 +70,9 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
       </SubMenu>
     ));
   };
+
   return (
     <>
-      <Button
-        onClick={() => {
-          history.push('/logout');
-        }}>
-        click
-      </Button>
-
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
           collapsible
@@ -85,7 +85,9 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
               justifyContent: 'center',
               padding: '10px 0',
             }}>
-            <Logo width={collapsed ? 65 : 80} height={collapsed ? 65 : 80} />
+            <Link to='/home'>
+              <Logo width={collapsed ? 65 : 80} height={collapsed ? 65 : 80} />
+            </Link>
           </div>
           <Menu theme='dark' mode='inline'>
             {makeRoute(makeLegalRoute())}
@@ -97,9 +99,13 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
           <Breadcrumb style={{ margin: '15px 30px' }} separator='>'>
             {pathname.length === 1
               ? null
+              : pathname === '/home'
+              ? null
               : pathname
                   .split('/')
-                  .map((item) => <Breadcrumb.Item>{item}</Breadcrumb.Item>)}
+                  .map((item, index) => (
+                    <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>
+                  ))}
           </Breadcrumb>
 
           <Content style={{ margin: '0 30px' }}>{children}</Content>

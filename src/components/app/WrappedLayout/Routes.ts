@@ -1,13 +1,8 @@
-import {
-  UserAddOutlined,
-  OrderedListOutlined,
-  CarOutlined,
-  TagOutlined,
-} from '@ant-design/icons';
+import { CarOutlined, TagOutlined } from '@ant-design/icons';
 
 export const ROUTES = [
   {
-    route: 'Products',
+    route: 'product',
     icon: CarOutlined,
     methods: [
       {
@@ -23,7 +18,7 @@ export const ROUTES = [
     ],
   },
   {
-    route: 'Category',
+    route: 'category',
     icon: TagOutlined,
     methods: [
       {

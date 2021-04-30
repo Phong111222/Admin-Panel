@@ -1,8 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router';
-import WrappedLayout from '../components/app/WrappedLayout';
-import useAuth from '../Hook/useAuth';
 
 interface type {
   name: string;
@@ -88,7 +85,6 @@ const routes: type[] = [
 ];
 
 const MakeRoute = () => {
-  const jwt = useAuth();
   return (
     <React.Suspense fallback={<>Loading</>}>
       <Switch>
@@ -102,7 +98,7 @@ const MakeRoute = () => {
         ))}
         ))
       </Switch>
-      {!jwt ? <Redirect from='/home' to='/login' /> : <Redirect to='/home' />}
+      {/* {!jwt ? <Redirect from='/home' to='/login' /> : <Redirect to='/home' />} */}
     </React.Suspense>
   );
 };
