@@ -12,18 +12,16 @@ const WrappedAuth: FC<Props> = ({ children }) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('Phong');
     if (!jwtAuth) {
       history.replace('/login');
     }
   }, [jwtAuth, history]);
   useEffect(() => {
     if (jwtAuth) {
-      console.log('Phong2');
       const currentDate = Date.now();
       const jwt_decoded = jwt_decode<{ exp: number; iat: number }>(jwtAuth);
       if (jwt_decoded.exp * 1000 < currentDate) {
-        history.replace('/login');
+        history.replace('/logout');
       }
     }
     // eslint-disable-next-line

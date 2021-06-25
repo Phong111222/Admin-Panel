@@ -12,7 +12,7 @@ const persistConfig = {
   storage: storage,
 
   stateReconciler: autoMergeLevel2, // Xem thêm tại mục "Quá trình merge".
-  whitelist: ['Auth', 'user'],
+  whitelist: ['Auth', 'user', 'category', 'product'],
 };
 
 const pReducer = persistReducer(persistConfig, RootReducer as any);

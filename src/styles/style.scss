@@ -6,7 +6,7 @@
     color: rgb(187, 36, 36);
     font-size: 15px;
     font-weight: 600;
-    text-align: center;
+    // text-align: center;
     margin-top: 5px;
   }
 }
@@ -70,4 +70,25 @@ img {
 }
 .ant-layout-header {
   background: $darkBlue;
+}
+.featuredImg_uploader {
+  .ant-upload {
+    width: 128px;
+    height: 128px;
+  }
+}
+.uploadContainer {
+  .formUpload {
+    .ant-col.ant-form-item-control {
+      .ant-form-item-control-input-content {
+        display: flex;
+        justify-content: center;
+      }
+      .ant-form-item-explain.ant-form-item-explain-error {
+        div[role='alert'] {
+          text-align: center;
+        }
+      }
+    }
+  }
 }

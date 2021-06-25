@@ -8,6 +8,7 @@ import { RootState } from '../../../store/RootReducer';
 import { UserState } from '../../../store/user/types';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +29,7 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
   } = useSelector<RootState, UserState>((state) => state.user);
 
   useEffect(() => {
-    if (pathname === '/login') {
+    if (pathname === '/login' || pathname === '/') {
       history.replace('/home');
     }
   }, [pathname, history]);
@@ -90,7 +91,17 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
             </Link>
           </div>
           <Menu theme='dark' mode='inline'>
+            <Menu.Item
+              icon={<UserOutlined />}
+              style={{ background: '#438ad5', margin: '0' }}>
+              <Link to='/#'>Information</Link>
+            </Menu.Item>
             {makeRoute(makeLegalRoute())}
+            <Menu.Item
+              icon={<LogoutOutlined />}
+              style={{ background: '#438ad5', margin: '0' }}>
+              <Link to='/logout'>Logout</Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
@@ -101,11 +112,13 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
               ? null
               : pathname === '/home'
               ? null
-              : pathname
-                  .split('/')
-                  .map((item, index) => (
-                    <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>
-                  ))}
+              : pathname.split('/').map((item, index) =>
+                  item === '' ? null : (
+                    <Breadcrumb.Item key={index}>
+                      <strong>{item}</strong>
+                    </Breadcrumb.Item>
+                  )
+                )}
           </Breadcrumb>
 
           <Content style={{ margin: '0 30px' }}>{children}</Content>

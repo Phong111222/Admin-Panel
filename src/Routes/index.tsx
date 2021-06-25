@@ -1,3 +1,4 @@
+import { LoadingOutlined } from '@ant-design/icons';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -82,11 +83,51 @@ const routes: type[] = [
     id: 'products_create',
     exact: true,
   },
+  {
+    name: 'category',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Category/ListCategory'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/category/list',
+    id: 'category_list',
+    exact: true,
+  },
+  {
+    name: 'category',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Category/CreateCategory'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/category/create',
+    id: 'category_create',
+    exact: true,
+  },
 ];
 
 const MakeRoute = () => {
   return (
-    <React.Suspense fallback={<>Loading</>}>
+    <React.Suspense
+      fallback={
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100vw',
+            height: '100vh',
+            background: 'rgba(0,0,0,0.3)',
+            right: 0,
+          }}>
+          <LoadingOutlined style={{ fontSize: 100 }} />
+        </div>
+      }>
       <Switch>
         {routes.map((route) => (
           <Route
