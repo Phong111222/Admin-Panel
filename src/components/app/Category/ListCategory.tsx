@@ -15,7 +15,6 @@ const ListCategories: FC = () => {
       typeof window !== 'undefined'
         ? window.localStorage.getItem('token')
         : null;
-    console.log(Category.GET_AND_TOGGLE_BY_ID(_id));
     await AxiosConfig.patch(Category.GET_AND_TOGGLE_BY_ID(_id), null, {
       headers: {
         Authorization: `Bearer ${token}`,
