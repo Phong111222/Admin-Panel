@@ -1,4 +1,4 @@
-import { CarOutlined, TagOutlined } from '@ant-design/icons';
+import { CarOutlined, TagOutlined, UserAddOutlined } from '@ant-design/icons';
 
 export const ROUTES = [
   {
@@ -30,6 +30,22 @@ export const ROUTES = [
         httpRequest: 'POST',
         title: 'Create product',
         path: '/product/create',
+      },
+    ],
+  },
+  {
+    route: 'role',
+    icon: UserAddOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Role list',
+        path: '/role/list',
+      },
+      {
+        httpRequest: 'POST',
+        title: 'Role create',
+        path: '/role/create',
       },
     ],
   },

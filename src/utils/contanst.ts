@@ -21,3 +21,8 @@ export const Product = {
   LIST_PRODUCTS_CREATE_PRODUCT: '/product',
   TOGGLE_AND_GET_BY_ID: (id: string) => `/prodcut/${id}`,
 };
+
+export const Role = {
+  LIST_AND_CREATE_ROLE: '/role',
+  TOGGLE_AND_GET_BY_ID: (id: string) => `/role/${id}`,
+};

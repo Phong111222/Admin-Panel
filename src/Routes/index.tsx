@@ -107,6 +107,30 @@ const routes: type[] = [
     id: 'category_create',
     exact: true,
   },
+  {
+    name: 'role',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Role/RoleList'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/role/list',
+    id: 'role_create',
+    exact: true,
+  },
+  {
+    name: 'role',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Role/CreateRole'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/role/create',
+    id: 'role_list',
+    exact: true,
+  },
 ];
 
 const MakeRoute = () => {

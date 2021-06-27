@@ -60,7 +60,10 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
 
   const makeRoute = (routes: typeof ROUTES) => {
     return routes.map((item) => (
-      <SubMenu key={item.route} title={item.route} icon={<item.icon />}>
+      <SubMenu
+        key={item.route}
+        title={item.route}
+        icon={<item.icon style={{ marginRight: 10 }} />}>
         {item.methods.map((method) => {
           return (
             <Menu.Item key={method.path}>
