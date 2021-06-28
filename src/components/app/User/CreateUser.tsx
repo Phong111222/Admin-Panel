@@ -7,7 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
 import { UserState } from '../../../store/user/types';
 import { RoleState } from '../../../store/role/types';
-import { CreateUserFail } from '../../../store/user/actions';
+import {
+  CreateUser,
+  CreateUserFail,
+  CreateUserSuccess,
+} from '../../../store/user/actions';
+import { postHttp } from '../../../utils/api';
+import { BasicAuth, User } from '../../../utils/contanst';
+import { encode } from 'js-base64';
 
 const formFields = ['fullname', 'email', 'password', 'role'];
 
@@ -23,6 +30,25 @@ const UserCreate = () => {
     password: string;
   }) => {
     try {
+      dispatch(CreateUser());
+      // const token =
+      //   (typeof window !== 'undefined' &&
+      //     window.localStorage.getItem('token')) ||
+      //   null;
+      const {
+        data: {
+          data: { newUser },
+        },
+      } = await postHttp(User.create_user, values, {
+        headers: {
+          Authorization: `Basic ${encode(
+            `${BasicAuth.basicauth_user}:${BasicAuth.basicauth_password}`
+          )}`,
+        },
+      });
+      dispatch(CreateUserSuccess(newUser));
+      ShowSuccess('CREATE USER SUCCESS');
+      form.resetFields(formFields);
     } catch (error) {
       const { message } = error.response.data;
       const index = formFields.findIndex(

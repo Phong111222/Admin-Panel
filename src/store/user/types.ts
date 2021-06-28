@@ -8,6 +8,7 @@ export const UserTypes = {
   CREATE_USER: 'user/CREATE_USER',
   CREATE_USER_SUCCESS: 'user/CREATE_USER_SUCCESS',
   CREATE_USER_FAIL: 'user/CREATE_USER_FAIL',
+  TOGGLE_USER: 'user/TOGGLE_USER',
 };
 
 export interface UserType {
@@ -39,16 +40,27 @@ export interface UserState {
 }
 
 export interface UserPayload {
-  user?: any;
+  user?: UserType;
   methods?: string[];
   routes?: string[];
   role?: string;
   newUser?: UserType;
   list?: UserType[];
   error?: any;
+  userID?: string;
 }
 
 export interface UserAction {
-  type: typeof UserTypes.GET_USER | typeof UserTypes.GET_USER_COMPLETE;
+  type:
+    | typeof UserTypes.GET_USER
+    | typeof UserTypes.GET_USER_COMPLETE
+    | typeof UserTypes.CREATE_USER
+    | typeof UserTypes.CREATE_USER_FAIL
+    | typeof UserTypes.CREATE_USER_SUCCESS
+    | typeof UserTypes.GET_USER_LIST
+    | typeof UserTypes.GET_USER_LIST_FAIL
+    | typeof UserTypes.GET_USER_LIST_SUCCESS
+    | typeof UserTypes.RESET_USER
+    | typeof UserTypes.TOGGLE_USER;
   payload?: UserPayload;
 }

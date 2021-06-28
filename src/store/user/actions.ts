@@ -34,6 +34,41 @@ export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
   } catch (error) {}
 };
 
+export const GetUserList = () => async (dispatch: Dispatch<UserAction>) => {
+  try {
+    dispatch({
+      type: UserTypes.GET_USER_LIST,
+    });
+    const token =
+      typeof window !== 'undefined'
+        ? window.localStorage.getItem('token')
+        : null;
+    const {
+      data: {
+        data: { users: list },
+      },
+    } = await getHttpRequest(User.all_user, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({
+      type: UserTypes.GET_USER_LIST_SUCCESS,
+      payload: {
+        list,
+      },
+    });
+  } catch (error) {
+    const { data } = error.reponse;
+    dispatch({
+      type: UserTypes.GET_USER_LIST_FAIL,
+      payload: {
+        error: data,
+      },
+    });
+  }
+};
+
 export const CreateUser = (): UserAction => ({
   type: UserTypes.CREATE_USER,
 });
@@ -57,3 +92,10 @@ export const ResetUser = () => {
     type: UserTypes.RESET_USER,
   };
 };
+
+export const ToggleUser = (userID: string): UserAction => ({
+  type: UserTypes.TOGGLE_USER,
+  payload: {
+    userID,
+  },
+});
