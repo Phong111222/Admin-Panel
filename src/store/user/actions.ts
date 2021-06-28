@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { getHttpRequest } from '../../utils/api';
 import { User } from '../../utils/contanst';
-import { UserAction, UserTypes } from './types';
+import { UserAction, UserType, UserTypes } from './types';
 
 export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
   try {
@@ -33,6 +33,24 @@ export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
     });
   } catch (error) {}
 };
+
+export const CreateUser = (): UserAction => ({
+  type: UserTypes.CREATE_USER,
+});
+
+export const CreateUserSuccess = (newUser: UserType): UserAction => ({
+  type: UserTypes.CREATE_USER_SUCCESS,
+  payload: {
+    newUser,
+  },
+});
+
+export const CreateUserFail = (error: any): UserAction => ({
+  type: UserTypes.CREATE_USER_FAIL,
+  payload: {
+    error,
+  },
+});
 
 export const ResetUser = () => {
   return {

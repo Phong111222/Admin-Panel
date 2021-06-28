@@ -1,6 +1,43 @@
-import { CarOutlined, TagOutlined, UserAddOutlined } from '@ant-design/icons';
+import {
+  ContactsOutlined,
+  ShoppingCartOutlined,
+  TagOutlined,
+  UsergroupAddOutlined,
+} from '@ant-design/icons';
 
 export const ROUTES = [
+  {
+    route: 'role',
+    icon: ContactsOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Role list',
+        path: '/role/list',
+      },
+      {
+        httpRequest: 'POST',
+        title: 'Role create',
+        path: '/role/create',
+      },
+    ],
+  },
+  {
+    route: 'user',
+    icon: UsergroupAddOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'User list',
+        path: '/user/list',
+      },
+      {
+        httpRequest: 'POST',
+        title: 'User create',
+        path: '/user/create',
+      },
+    ],
+  },
   {
     route: 'category',
     icon: TagOutlined,
@@ -19,7 +56,7 @@ export const ROUTES = [
   },
   {
     route: 'product',
-    icon: CarOutlined,
+    icon: ShoppingCartOutlined,
     methods: [
       {
         httpRequest: 'GET',
@@ -30,22 +67,6 @@ export const ROUTES = [
         httpRequest: 'POST',
         title: 'Create product',
         path: '/product/create',
-      },
-    ],
-  },
-  {
-    route: 'role',
-    icon: UserAddOutlined,
-    methods: [
-      {
-        httpRequest: 'GET',
-        title: 'Role list',
-        path: '/role/list',
-      },
-      {
-        httpRequest: 'POST',
-        title: 'Role create',
-        path: '/role/create',
       },
     ],
   },

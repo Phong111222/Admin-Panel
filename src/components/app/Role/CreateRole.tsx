@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Row, Col, Form, Input, Checkbox, Button } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import Label from '../../common/Label';
-import { RoleType } from '../../../store/role/types';
-import { useDispatch } from 'react-redux';
+import { RoleState, RoleType } from '../../../store/role/types';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CreateRole as createRole,
   CreateRoleSuccess,
@@ -13,12 +13,15 @@ import { postHttp } from '../../../utils/api';
 import { Role } from '../../../utils/contanst';
 
 import ShowError from '../../../utils/showError';
+import { RootState } from '../../../store/RootReducer';
+import ShowSuccess from '../../../utils/showSuccess';
 const methods = ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'];
 const permissions = ['category', 'role', 'product', 'staff', 'invoice'];
 const formfields = ['name', 'permissions', 'methods'];
 const CreateRole: FC = () => {
   const [form] = useForm();
   const dispatch = useDispatch();
+  const { loading } = useSelector<RootState, RoleState>((state) => state.role);
   const onFinish = async (values: RoleType) => {
     try {
       dispatch(createRole());
@@ -36,6 +39,7 @@ const CreateRole: FC = () => {
         },
       });
       dispatch(CreateRoleSuccess(newRole));
+      ShowSuccess('CREATE ROLE SUCCESS');
       form.resetFields(formfields);
     } catch (error) {
       const { message } = error.response.data;
@@ -102,7 +106,7 @@ const CreateRole: FC = () => {
             </Form.Item>
           </Col>
           <Col>
-            <Button type='primary' htmlType='submit'>
+            <Button type='primary' htmlType='submit' loading={loading}>
               Create
             </Button>
           </Col>

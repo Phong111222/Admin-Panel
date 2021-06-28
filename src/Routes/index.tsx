@@ -23,18 +23,7 @@ const routes: type[] = [
   //   id: 'login',
   //   exact: true,
   // },
-  {
-    name: 'register',
-    component: React.lazy(() =>
-      Promise.all([
-        import('../components/Auth/register/Register'),
-        new Promise((resolve) => setTimeout(resolve, 100)),
-      ]).then(([moduleExports]) => moduleExports)
-    ),
-    path: '/register',
-    id: 'register',
-    exact: true,
-  },
+
   {
     name: 'logout',
     component: React.lazy(() =>
@@ -129,6 +118,42 @@ const routes: type[] = [
     ),
     path: '/role/create',
     id: 'role_list',
+    exact: true,
+  },
+  {
+    name: 'account',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Account'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/account/info',
+    id: 'account_info',
+    exact: true,
+  },
+  {
+    name: 'user',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/User/UserList'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/user/list',
+    id: 'user_list',
+    exact: true,
+  },
+  {
+    name: 'user',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/User/CreateUser'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/user/create',
+    id: 'user_create',
     exact: true,
   },
 ];
