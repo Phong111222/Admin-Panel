@@ -10,6 +10,17 @@ export const Auth = {
 
 export const User = {
   user_info: '/user/getCurrent',
+  create_user: '/auth/register',
+  all_user: '/user',
+  toggle_user: (id: string) => `/user/${id}`,
+  update: (id: string) => `/user/updateOne/${id}`,
+};
+
+export const Staff = {
+  create_staff_and_staff_list: '/staff',
+  staff_ind: (id: string) => `/staff/${id}`,
+  toggle_staff: (id: string) => `/staff/${id}`,
+  update: (id: string) => `/staff/updateOne/${id}`,
 };
 
 export const Category = {
@@ -25,4 +36,11 @@ export const Product = {
 export const Role = {
   LIST_AND_CREATE_ROLE: '/role',
   TOGGLE_AND_GET_BY_ID: (id: string) => `/role/${id}`,
+};
+
+export const Analytic = {
+  GET_TOTAL: '/analytic/total',
+  GET_MONTHLY_REVENUE_BY_YEAR: (year: string) => `/analytic/${year}`,
+  GET_RANK_STAFF: '/analytic/rankStaff',
+  GET_RANK_PRODUCT: '/analytic/rankProduct',
 };

@@ -1,0 +1,19 @@
+@import '../../../styles/variable';
+.avatar_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  .avatar_group {
+    display: flex;
+    width: auto;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 10px;
+    height: 50px;
+    border-radius: 20px;
+    &:hover {
+      transition: all 0.5s;
+      background: #2e6eaf;
+    }
+  }
+}

@@ -1,19 +1,25 @@
 import { Col, Row, Form, Input, Button } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CreateCategoryFail,
   CreateCategory as createCategory,
   CreateCategorySuccess,
 } from '../../../store/category/actions';
+import { CategoryState } from '../../../store/category/types';
+import { RootState } from '../../../store/RootReducer';
 import { postHttp } from '../../../utils/api';
 import { Category } from '../../../utils/contanst';
+import ShowSuccess from '../../../utils/showSuccess';
 
 import Label from '../../common/Label';
 
 const fields = ['name', 'description'];
 const CreateCategory = () => {
   const dispatch = useDispatch();
+  const { loading } = useSelector<RootState, CategoryState>(
+    (state) => state.category
+  );
   const [form] = useForm();
   const onFinish = async (values: { name: string; description: string }) => {
     try {
@@ -32,6 +38,7 @@ const CreateCategory = () => {
         },
       });
       dispatch(CreateCategorySuccess(newCategory));
+      ShowSuccess('CREATE CATEGORY SUCCESS');
       form.resetFields(fields);
     } catch (error) {
       const { message } = error.response.data;
@@ -74,7 +81,7 @@ const CreateCategory = () => {
             </Col>
             <Col span={24}>
               <Form.Item>
-                <Button htmlType='submit' type='primary'>
+                <Button htmlType='submit' type='primary' loading={loading}>
                   Create
                 </Button>
               </Form.Item>

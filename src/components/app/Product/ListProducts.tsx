@@ -102,6 +102,13 @@ const ListProduct: FC = () => {
         onCancel={() => setVisible(false)}
         visible={visible}
         // title={product?.name}
+        className='ant-footer-modal_custom'
+        title={
+          <p style={{ textAlign: 'center', marginBottom: 0 }}>
+            {product?.name}
+          </p>
+        }
+        footer={<></>}
         okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: 'none' } }}>
         {product && (
@@ -117,7 +124,7 @@ const ListProduct: FC = () => {
               alt={product.featuredImg}
             />
             <Row style={{ width: '100%', padding: '0 50px' }}>
-              <Col
+              {/* <Col
                 span={24}
                 style={{
                   display: 'flex',
@@ -128,7 +135,7 @@ const ListProduct: FC = () => {
                   Name:{' '}
                 </Title>
                 <Text style={{ marginLeft: 10 }}>{product.name}</Text>
-              </Col>
+              </Col> */}
               <Col
                 span={24}
                 style={{

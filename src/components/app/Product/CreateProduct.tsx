@@ -7,6 +7,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategoryState } from '../../../store/category/types';
 import { createProduct } from '../../../store/product/actions';
+import { ProductState } from '../../../store/product/types';
 import { RootState } from '../../../store/RootReducer';
 import Label from '../../common/Label';
 // interface ProductType {
@@ -57,7 +58,9 @@ const CreateProduct: FC = () => {
   const { list } = useSelector<RootState, CategoryState>(
     (state) => state.category
   );
-
+  const { loading } = useSelector<RootState, ProductState>(
+    (state) => state.product
+  );
   const UploadButton = () => {
     return (
       <div
@@ -200,7 +203,7 @@ const CreateProduct: FC = () => {
           </Col>
         </Row>
         <Form.Item>
-          <Button htmlType='submit' type='primary'>
+          <Button htmlType='submit' type='primary' loading={loading}>
             Create
           </Button>
         </Form.Item>

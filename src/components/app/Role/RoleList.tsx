@@ -82,7 +82,7 @@ const RoleList: FC = () => {
         })}
         columns={Columns}
         dataSource={list}
-        pagination={{ pageSize: 8 }}
+        pagination={{ pageSize: 7 }}
         bordered
       />
     </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Row, Col, Avatar, Typography } from 'antd';
 
 import { ROUTES } from './Routes';
 import Logo from '../../Logo';
@@ -9,7 +9,7 @@ import { UserState } from '../../../store/user/types';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-
+import styles from './styles.module.scss';
 interface Props {
   children: React.ReactNode;
 }
@@ -26,6 +26,7 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
   };
   const {
     permissions: { methods, routes },
+    user: { info },
   } = useSelector<RootState, UserState>((state) => state.user);
 
   useEffect(() => {
@@ -33,7 +34,6 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
       history.replace('/home');
     }
   }, [pathname, history]);
-
   const makeLegalRoute = () => {
     // const methodsTest = ['POST'];
     // const routesTest = ['Products', 'Category'];
@@ -94,11 +94,11 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
             </Link>
           </div>
           <Menu theme='dark' mode='inline'>
-            <Menu.Item
+            {/* <Menu.Item
               icon={<UserOutlined />}
               style={{ background: '#438ad5', margin: '0' }}>
-              <Link to='/#'>Information</Link>
-            </Menu.Item>
+              <Link to='/account/info'>Information</Link>
+            </Menu.Item> */}
             {makeRoute(makeLegalRoute())}
             <Menu.Item
               icon={<LogoutOutlined />}
@@ -108,7 +108,28 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
           </Menu>
         </Sider>
         <Layout>
-          <Header>show user icon </Header>
+          <Header>
+            <Row style={{ height: '100%' }}>
+              <Col offset={19} span={5} className={styles.avatar_container}>
+                <Link to='/account/info'>
+                  <div className={styles.avatar_group}>
+                    <Avatar size='small' icon={<UserOutlined />} />
+                    {info.fullname && (
+                      <Typography.Text
+                        style={{
+                          marginLeft: 10,
+                          fontWeight: 500,
+
+                          overflow: 'hidden',
+                        }}>
+                        {info.fullname}
+                      </Typography.Text>
+                    )}
+                  </div>
+                </Link>
+              </Col>
+            </Row>
+          </Header>
 
           <Breadcrumb style={{ margin: '15px 30px' }} separator='>'>
             {pathname.length === 1
