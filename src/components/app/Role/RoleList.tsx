@@ -7,11 +7,11 @@ import { RootState } from '../../../store/RootReducer';
 import { ToggleRole } from '../../../store/role/actions';
 import AxiosConfig from '../../../config/axiosConfig';
 import { Role } from '../../../utils/contanst';
+import { useMemo } from 'react';
 const RoleList: FC = () => {
   const dispatch = useDispatch();
   const { list } = useSelector<RootState, RoleState>((state) => state.role);
   const handleToggle = async (id: string) => {
-    console.log(id);
     dispatch(ToggleRole(id));
     const token =
       (typeof window !== 'undefined' && window.localStorage.getItem('token')) ||
@@ -73,7 +73,10 @@ const RoleList: FC = () => {
       key: 'active',
     },
   ];
-
+  const newList = useMemo(() => {
+    return list.map((role, index: number) => ({ ...role, key: index }));
+    // eslint-disable-next-line
+  }, [handleToggle]);
   return (
     <>
       <Table<RoleType>
@@ -81,7 +84,7 @@ const RoleList: FC = () => {
           style: { cursor: 'pointer' },
         })}
         columns={Columns}
-        dataSource={list}
+        dataSource={newList}
         pagination={{ pageSize: 7 }}
         bordered
       />

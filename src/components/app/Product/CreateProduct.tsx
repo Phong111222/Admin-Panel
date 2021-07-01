@@ -9,6 +9,7 @@ import { CategoryState } from '../../../store/category/types';
 import { createProduct } from '../../../store/product/actions';
 import { ProductState } from '../../../store/product/types';
 import { RootState } from '../../../store/RootReducer';
+import getBase64 from '../../../utils/getBase64';
 import Label from '../../common/Label';
 // interface ProductType {
 //   name: string;
@@ -27,11 +28,6 @@ import Label from '../../common/Label';
 //   }
 // }
 
-function getBase64(img: any, callback: Function) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
 const CreateProduct: FC = () => {
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [image, setImage] = useState<{

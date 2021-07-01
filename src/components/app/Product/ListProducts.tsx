@@ -1,5 +1,7 @@
 import { Table, Tag, Typography, Modal, Row, Col } from 'antd';
+
 import { ColumnsType } from 'antd/lib/table';
+import { useMemo } from 'react';
 import { useState } from 'react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
@@ -78,12 +80,16 @@ const ListProduct: FC = () => {
       key: 'price',
     },
   ];
-
+  const newList = useMemo(
+    () => list.map((product, index) => ({ ...product, key: index })),
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Table<ProductType>
         columns={Columns}
-        dataSource={list}
+        dataSource={newList}
         bordered
         onRow={(record) => {
           return {

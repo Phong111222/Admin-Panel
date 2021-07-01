@@ -10,13 +10,12 @@ import {
   CreateRoleFail,
 } from '../../../store/role/actions';
 import { postHttp } from '../../../utils/api';
-import { Role } from '../../../utils/contanst';
+import { methods, permissions, Role } from '../../../utils/contanst';
 
 import ShowError from '../../../utils/showError';
 import { RootState } from '../../../store/RootReducer';
 import ShowSuccess from '../../../utils/showSuccess';
-const methods = ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'];
-const permissions = ['category', 'role', 'product', 'staff', 'invoice'];
+
 const formfields = ['name', 'permissions', 'methods'];
 const CreateRole: FC = () => {
   const [form] = useForm();

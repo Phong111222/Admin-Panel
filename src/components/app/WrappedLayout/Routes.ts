@@ -2,6 +2,7 @@ import {
   ContactsOutlined,
   ShoppingCartOutlined,
   TagOutlined,
+  UserAddOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons';
 
@@ -24,7 +25,7 @@ export const ROUTES = [
   },
   {
     route: 'user',
-    icon: UsergroupAddOutlined,
+    icon: UserAddOutlined,
     methods: [
       {
         httpRequest: 'GET',
@@ -35,6 +36,22 @@ export const ROUTES = [
         httpRequest: 'POST',
         title: 'User create',
         path: '/user/create',
+      },
+    ],
+  },
+  {
+    route: 'staff',
+    icon: UsergroupAddOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Staff list',
+        path: '/staff/list',
+      },
+      {
+        httpRequest: 'POST',
+        title: 'Staff create',
+        path: '/staff/create',
       },
     ],
   },

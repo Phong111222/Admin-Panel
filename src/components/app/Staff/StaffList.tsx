@@ -1,21 +1,21 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
-import { UserState, UserType } from '../../../store/user/types';
-import { Row, Col, Card, Button, Avatar, Pagination, Typography } from 'antd';
+import { StaffState, StaffType } from '../../../store/staff/types';
+import { Row, Col, Card, Button, Avatar, Typography, Pagination } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { useState } from 'react';
-import { ToggleUser } from '../../../store/user/actions';
+import { ToggleStaff } from '../../../store/staff/actions';
 import AxiosConfig from '../../../config/axiosConfig';
-import { User } from '../../../utils/contanst';
+import { Staff } from '../../../utils/contanst';
 const { Title, Text } = Typography;
-const pageSize = 10;
-const UserList = () => {
-  console.log('Phong');
-  const dispatch = useDispatch();
-  const { list } = useSelector<RootState, UserState>((state) => state.user);
+const pageSize = 8;
 
-  const [renderList, setRenderList] = useState<UserType[]>(() => {
-    const renderList: UserType[] = [];
+const StaffList = () => {
+  const dispatch = useDispatch();
+  const { list } = useSelector<RootState, StaffState>((state) => state.staff);
+
+  const [renderList, setRenderList] = useState<StaffType[]>(() => {
+    const renderList: StaffType[] = [];
     for (
       let i = 0;
       i < (pageSize > list.length ? list.length : pageSize);
@@ -26,23 +26,23 @@ const UserList = () => {
     return renderList;
   });
   const handleToggle = async (id: string) => {
-    dispatch(ToggleUser(id));
-    const newList = renderList.map((user) =>
-      user._id === id ? { ...user, isActive: !user.isActive } : user
-    );
-    const token = window.localStorage.getItem('token') || null;
-
-    await AxiosConfig.patch(User.toggle_user(id), undefined, {
+    dispatch(ToggleStaff(id));
+    const token = window.localStorage.getItem('token');
+    await AxiosConfig.patch(Staff.toggle_staff(id), undefined, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    const newList = renderList.map((staff) =>
+      staff._id === id ? { ...staff, isActive: !staff.isActive } : staff
+    );
     setRenderList(newList);
   };
+
   return (
     <>
       <Row style={{ width: '85%', margin: '0 auto' }}>
-        {renderList.map((user, index) => (
+        {renderList.map((staff, index) => (
           <Col
             key={index}
             span={12}
@@ -65,21 +65,39 @@ const UserList = () => {
                     <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
                       Name:
                     </Title>
-                    <Text style={{ marginLeft: 5 }}>{user.fullname}</Text>
+                    <Text
+                      style={{
+                        marginLeft: 5,
+                      }}>{`${staff.lastname} ${staff.firstname}`}</Text>
+                  </div>
+                  <div style={{ display: 'flex' }}>
+                    <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
+                      Gender:
+                    </Title>
+                    <Text
+                      style={{
+                        marginLeft: 5,
+                      }}>{`${staff.gender}`}</Text>
                   </div>
                   <div style={{ display: 'flex' }}>
                     <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
                       Email:
                     </Title>
-                    <Text style={{ marginLeft: 5 }}>{user.email}</Text>
+                    <Text style={{ marginLeft: 5 }}>{staff.contactEmail}</Text>
+                  </div>
+                  <div style={{ display: 'flex' }}>
+                    <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
+                      Company:
+                    </Title>
+                    <Text style={{ marginLeft: 5 }}>{staff.company}</Text>
                   </div>
                 </Col>
                 <Col span={4}>
                   <Button
                     type='primary'
-                    danger={!user.isActive}
-                    onClick={() => handleToggle(user._id)}>
-                    {user.isActive ? 'Active' : 'InActive'}
+                    onClick={() => handleToggle(staff._id)}
+                    danger={!staff.isActive}>
+                    {staff.isActive ? 'Active' : 'InActive'}
                   </Button>
                 </Col>
               </Row>
@@ -91,7 +109,7 @@ const UserList = () => {
         total={list.length}
         pageSize={pageSize}
         onChange={(page, pageNumber) => {
-          const newList: UserType[] = [];
+          const newList: StaffType[] = [];
           const limit = (pageNumber as number) * page;
           for (
             let i = (pageNumber as number) * (page - 1);
@@ -107,4 +125,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default StaffList;

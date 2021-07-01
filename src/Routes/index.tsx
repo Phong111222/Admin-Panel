@@ -156,6 +156,30 @@ const routes: type[] = [
     id: 'user_create',
     exact: true,
   },
+  {
+    name: 'staff',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Staff/StaffCreate'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/staff/create',
+    id: 'staff_create',
+    exact: true,
+  },
+  {
+    name: 'staff',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Staff/StaffList'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/staff/list',
+    id: 'staff_list',
+    exact: true,
+  },
 ];
 
 const MakeRoute = () => {
