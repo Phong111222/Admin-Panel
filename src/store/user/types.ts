@@ -62,5 +62,6 @@ export interface UserAction {
     | typeof UserTypes.GET_USER_LIST_SUCCESS
     | typeof UserTypes.RESET_USER
     | typeof UserTypes.TOGGLE_USER;
+
   payload?: UserPayload;
 }

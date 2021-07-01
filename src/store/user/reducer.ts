@@ -75,7 +75,6 @@ const UserReducer: Reducer<UserState, UserAction> = (
           ? { ...user, isActive: !user.isActive }
           : user
       );
-      console.log(newList);
       return {
         ...state,
         list: [...newList],

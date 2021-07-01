@@ -77,7 +77,10 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout
+        style={{
+          minHeight: '100vh',
+        }}>
         <Sider
           collapsible
           collapsed={collapsed}
@@ -108,7 +111,11 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
           </Menu>
         </Sider>
         <Layout>
-          <Header>
+          <Header
+            style={{
+              boxShadow:
+                '0 1px 2px -2px rgb(117 117 117 / 16%), 0 3px 6px 0 rgb(34 33 33 / 12%), 0 0px 8px 0px rgb(78 78 78 / 90%)',
+            }}>
             <Row style={{ height: '100%' }}>
               <Col offset={19} span={5} className={styles.avatar_container}>
                 <Link to='/account/info'>

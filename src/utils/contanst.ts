@@ -44,3 +44,5 @@ export const Analytic = {
   GET_RANK_STAFF: '/analytic/rankStaff',
   GET_RANK_PRODUCT: '/analytic/rankProduct',
 };
+export const methods = ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'];
+export const permissions = ['category', 'role', 'product', 'staff', 'invoice'];
