@@ -1,4 +1,4 @@
-import { ProductType } from '../product/types';
+import { ProductType } from "../product/types";
 
 export interface InvoiceType {
   paymentDate: any;

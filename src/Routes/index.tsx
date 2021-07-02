@@ -1,6 +1,6 @@
-import { LoadingOutlined } from '@ant-design/icons';
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { LoadingOutlined } from "@ant-design/icons";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 interface type {
   name: string;
@@ -25,159 +25,159 @@ const routes: type[] = [
   // },
 
   {
-    name: 'logout',
+    name: "logout",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/Auth/logout/Logout'),
+        import("../components/Auth/logout/Logout"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/logout',
-    id: 'logout',
+    path: "/logout",
+    id: "logout",
     exact: true,
   },
   {
-    name: 'home',
+    name: "home",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Home'),
+        import("../components/app/Home"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/home',
-    id: 'home',
+    path: "/home",
+    id: "home",
     exact: true,
   },
   {
-    name: 'product',
+    name: "product",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Product/ListProducts'),
+        import("../components/app/Product/ListProducts"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/product/list',
-    id: 'products_list',
+    path: "/product/list",
+    id: "products_list",
     exact: true,
   },
   {
-    name: 'product',
+    name: "product",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Product/CreateProduct'),
+        import("../components/app/Product/CreateProduct"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/product/create',
-    id: 'products_create',
+    path: "/product/create",
+    id: "products_create",
     exact: true,
   },
   {
-    name: 'category',
+    name: "category",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Category/ListCategory'),
+        import("../components/app/Category/ListCategory"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/category/list',
-    id: 'category_list',
+    path: "/category/list",
+    id: "category_list",
     exact: true,
   },
   {
-    name: 'category',
+    name: "category",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Category/CreateCategory'),
+        import("../components/app/Category/CreateCategory"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/category/create',
-    id: 'category_create',
+    path: "/category/create",
+    id: "category_create",
     exact: true,
   },
   {
-    name: 'role',
+    name: "role",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Role/RoleList'),
+        import("../components/app/Role/RoleList"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/role/list',
-    id: 'role_create',
+    path: "/role/list",
+    id: "role_create",
     exact: true,
   },
   {
-    name: 'role',
+    name: "role",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Role/CreateRole'),
+        import("../components/app/Role/CreateRole"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/role/create',
-    id: 'role_list',
+    path: "/role/create",
+    id: "role_list",
     exact: true,
   },
   {
-    name: 'account',
+    name: "account",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Account'),
+        import("../components/app/Account"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/account/info',
-    id: 'account_info',
+    path: "/account/info",
+    id: "account_info",
     exact: true,
   },
   {
-    name: 'user',
+    name: "user",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/User/UserList'),
+        import("../components/app/User/UserList"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/user/list',
-    id: 'user_list',
+    path: "/user/list",
+    id: "user_list",
     exact: true,
   },
   {
-    name: 'user',
+    name: "user",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/User/CreateUser'),
+        import("../components/app/User/CreateUser"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/user/create',
-    id: 'user_create',
+    path: "/user/create",
+    id: "user_create",
     exact: true,
   },
   {
-    name: 'staff',
+    name: "staff",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Staff/StaffCreate'),
+        import("../components/app/Staff/StaffCreate"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/staff/create',
-    id: 'staff_create',
+    path: "/staff/create",
+    id: "staff_create",
     exact: true,
   },
   {
-    name: 'staff',
+    name: "staff",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Staff/StaffList'),
+        import("../components/app/Staff/StaffList"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/staff/list',
-    id: 'staff_list',
+    path: "/staff/list",
+    id: "staff_list",
     exact: true,
   },
 ];
@@ -188,19 +188,21 @@ const MakeRoute = () => {
       fallback={
         <div
           style={{
-            position: 'fixed',
+            position: "fixed",
             top: 0,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(0,0,0,0.3)',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.3)",
             right: 0,
-          }}>
+          }}
+        >
           <LoadingOutlined style={{ fontSize: 100 }} />
         </div>
-      }>
+      }
+    >
       <Switch>
         {routes.map((route) => (
           <Route

@@ -1,20 +1,19 @@
-import { FC } from 'react';
-import { Button, Table, Tag } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
-import { RoleState, RoleType } from '../../../store/role/types';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/RootReducer';
-import { ToggleRole } from '../../../store/role/actions';
-import AxiosConfig from '../../../config/axiosConfig';
-import { Role } from '../../../utils/contanst';
-import { useMemo } from 'react';
+import { Button, Table, Tag } from "antd";
+import { ColumnsType } from "antd/lib/table";
+import { FC, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AxiosConfig from "../../../config/axiosConfig";
+import { ToggleRole } from "../../../store/role/actions";
+import { RoleState, RoleType } from "../../../store/role/types";
+import { RootState } from "../../../store/RootReducer";
+import { Role } from "../../../utils/contanst";
 const RoleList: FC = () => {
   const dispatch = useDispatch();
   const { list } = useSelector<RootState, RoleState>((state) => state.role);
   const handleToggle = async (id: string) => {
     dispatch(ToggleRole(id));
     const token =
-      (typeof window !== 'undefined' && window.localStorage.getItem('token')) ||
+      (typeof window !== "undefined" && window.localStorage.getItem("token")) ||
       null;
     await AxiosConfig.patch(Role.TOGGLE_AND_GET_BY_ID(id), null, {
       headers: {
@@ -24,18 +23,18 @@ const RoleList: FC = () => {
   };
   const Columns: ColumnsType<RoleType> = [
     {
-      title: <p style={{ textAlign: 'center', marginBottom: 0 }}>Name</p>,
-      dataIndex: 'name',
+      title: <p style={{ textAlign: "center", marginBottom: 0 }}>Name</p>,
+      dataIndex: "name",
       render: (name) => (
-        <p style={{ textAlign: 'center', marginBottom: 0 }}>{name}</p>
+        <p style={{ textAlign: "center", marginBottom: 0 }}>{name}</p>
       ),
-      key: 'name',
+      key: "name",
     },
     {
       title: (
-        <p style={{ textAlign: 'center', marginBottom: 0 }}>Permissions</p>
+        <p style={{ textAlign: "center", marginBottom: 0 }}>Permissions</p>
       ),
-      dataIndex: 'permissions',
+      dataIndex: "permissions",
       render: (permissions: string[]) => (
         <>
           {permissions.map((permission, index) => (
@@ -43,11 +42,11 @@ const RoleList: FC = () => {
           ))}
         </>
       ),
-      key: 'permissions',
+      key: "permissions",
     },
     {
-      title: <p style={{ textAlign: 'center', marginBottom: 0 }}>Methods</p>,
-      dataIndex: 'methods',
+      title: <p style={{ textAlign: "center", marginBottom: 0 }}>Methods</p>,
+      dataIndex: "methods",
       render: (methods: string[]) => (
         <>
           {methods.map((method, index) => (
@@ -55,22 +54,23 @@ const RoleList: FC = () => {
           ))}
         </>
       ),
-      key: 'methods',
+      key: "methods",
     },
     {
-      title: <p style={{ textAlign: 'center', marginBottom: 0 }}>Active</p>,
+      title: <p style={{ textAlign: "center", marginBottom: 0 }}>Active</p>,
       render: (_, { _id, isActive }) => (
         <div>
           <Button
             onClick={() => handleToggle(_id)}
-            style={{ display: 'block', margin: '0 auto' }}
-            type='primary'
-            danger={!isActive}>
-            {isActive ? 'Active' : 'InActive'}
+            style={{ display: "block", margin: "0 auto" }}
+            type="primary"
+            danger={!isActive}
+          >
+            {isActive ? "Active" : "InActive"}
           </Button>
         </div>
       ),
-      key: 'active',
+      key: "active",
     },
   ];
   const newList = useMemo(() => {
@@ -81,7 +81,7 @@ const RoleList: FC = () => {
     <>
       <Table<RoleType>
         onRow={() => ({
-          style: { cursor: 'pointer' },
+          style: { cursor: "pointer" },
         })}
         columns={Columns}
         dataSource={newList}

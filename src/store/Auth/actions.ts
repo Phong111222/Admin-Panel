@@ -1,13 +1,13 @@
-import { Dispatch } from 'react';
-import { postHttp } from '../../utils/api';
-import { Auth, BasicAuth } from '../../utils/contanst';
-import { AuthActions, AuthActionTypes } from './types';
-import { encode } from 'js-base64';
-import { notification } from 'antd';
-import { UserAction } from '../user/types';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from '../RootReducer';
-import { GetInfoUser } from '../user/actions';
+import { notification } from "antd";
+import { encode } from "js-base64";
+import { Dispatch } from "react";
+import { ThunkAction } from "redux-thunk";
+import { postHttp } from "../../utils/api";
+import { Auth, BasicAuth } from "../../utils/contanst";
+import { RootState } from "../RootReducer";
+import { GetInfoUser } from "../user/actions";
+import { UserAction } from "../user/types";
+import { AuthActions, AuthActionTypes } from "./types";
 
 export const login = (
   data: { email: string; password: string },
@@ -27,7 +27,7 @@ export const login = (
       },
     } = await postHttp(
       Auth.LOGIN,
-      { ...data, role: 'dev' },
+      { ...data, role: "dev" },
       {
         headers: {
           Authorization: `Basic ${encode(
@@ -36,16 +36,16 @@ export const login = (
         },
       }
     );
-    typeof window !== 'undefined' &&
-      window.localStorage.setItem('token', token);
+    typeof window !== "undefined" &&
+      window.localStorage.setItem("token", token);
     dispatch({ type: AuthActionTypes.LOGIN_SUCCESS });
     dispatch(GetInfoUser());
     notification.success({
-      message: 'LOGIN SUCCESS',
+      message: "LOGIN SUCCESS",
       duration: 3,
       onClose: () => {
         notification.destroy();
-        window.location.replace('/home');
+        window.location.replace("/home");
       },
     });
   } catch (errors) {
@@ -85,11 +85,11 @@ export const register = (
 
     dispatch({ type: AuthActionTypes.REGISTER_SUCCESS });
     notification.success({
-      message: 'REGISTER SUCCESS',
+      message: "REGISTER SUCCESS",
       duration: 3,
       onClose: () => {
         notification.destroy();
-        history.push('/login');
+        history.push("/login");
       },
     });
   } catch (errors) {

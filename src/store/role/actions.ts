@@ -1,7 +1,7 @@
-import { Dispatch } from 'redux';
-import { getHttpRequest } from '../../utils/api';
-import { Role } from '../../utils/contanst';
-import { RoleAction, RoleType, RoleTypes } from './types';
+import { Dispatch } from "redux";
+import { getHttpRequest } from "../../utils/api";
+import { Role } from "../../utils/contanst";
+import { RoleAction, RoleType, RoleTypes } from "./types";
 
 export const GetRoleList = () => async (dispatch: Dispatch<RoleAction>) => {
   try {
@@ -10,7 +10,7 @@ export const GetRoleList = () => async (dispatch: Dispatch<RoleAction>) => {
     });
 
     const token =
-      (typeof window !== 'undefined' && window.localStorage.getItem('token')) ||
+      (typeof window !== "undefined" && window.localStorage.getItem("token")) ||
       null;
     const {
       data: { data },

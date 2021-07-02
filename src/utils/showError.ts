@@ -1,4 +1,4 @@
-import { FormInstance, notification } from 'antd';
+import { FormInstance, notification } from "antd";
 
 const ShowError = (
   error: any,
@@ -16,9 +16,9 @@ const ShowError = (
     },
   ]);
   notification.error({
-    message: 'ERROR',
+    message: "ERROR",
     duration: 3,
-    description: message[fieldNames[index]] || 'ERROR',
+    description: message[fieldNames[index]] || "ERROR",
     onClose: () => notification.destroy(),
   });
   cb();
