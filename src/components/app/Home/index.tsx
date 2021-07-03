@@ -15,6 +15,7 @@ import {
 } from '../../../store/analytics/actions';
 import { RootState } from '../../../store/RootReducer';
 import { AnalyticState } from '../../../store/analytics/types';
+import { getListInvoice } from '../../../store/invoice/actions';
 
 const years = [2021, 2022, 2023, 2024];
 
@@ -34,6 +35,7 @@ const Home: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getListInvoice());
     dispatch(GetListCategories());
     dispatch(GetListProducts());
     dispatch(GetRoleList());

@@ -10,7 +10,6 @@ import { User } from '../../../utils/contanst';
 const { Title, Text } = Typography;
 const pageSize = 10;
 const UserList = () => {
-  console.log('Phong');
   const dispatch = useDispatch();
   const { list } = useSelector<RootState, UserState>((state) => state.user);
 

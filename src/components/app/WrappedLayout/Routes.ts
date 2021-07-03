@@ -1,5 +1,6 @@
 import {
   ContactsOutlined,
+  FileOutlined,
   ShoppingCartOutlined,
   TagOutlined,
   UserAddOutlined,
@@ -52,6 +53,17 @@ export const ROUTES = [
         httpRequest: 'POST',
         title: 'Staff create',
         path: '/staff/create',
+      },
+    ],
+  },
+  {
+    route: 'invoice',
+    icon: FileOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Invoice list',
+        path: '/invoice/list',
       },
     ],
   },

@@ -45,5 +45,12 @@ export const Analytic = {
   GET_RANK_STAFF: '/analytic/rankStaff',
   GET_RANK_PRODUCT: '/analytic/rankProduct',
 };
+
+export const Invoice = {
+  LIST_INVOICE: '/invoice',
+  GET_BY_ID: (id: string) => `/invoice/${id}`,
+  CONFIRM: (id: string) => `/invoice/confirm/${id}`,
+};
+
 export const methods = ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'];
 export const permissions = ['category', 'role', 'product', 'staff', 'invoice'];
