@@ -40,7 +40,8 @@ export const Role = {
 
 export const Analytic = {
   GET_TOTAL: '/analytic/total',
-  GET_MONTHLY_REVENUE_BY_YEAR: (year: string) => `/analytic/${year}`,
+  GET_MONTHLY_REVENUE_BY_YEAR: (year: string | number) =>
+    `/analytic/revenue/${year}`,
   GET_RANK_STAFF: '/analytic/rankStaff',
   GET_RANK_PRODUCT: '/analytic/rankProduct',
 };
