@@ -1,13 +1,13 @@
-import { Dispatch } from 'react';
-import { postHttp } from '../../utils/api';
-import { Auth, BasicAuth } from '../../utils/contanst';
-import { AuthActions, AuthActionTypes } from './types';
-import { encode } from 'js-base64';
-import { notification } from 'antd';
-import { UserAction } from '../user/types';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from '../RootReducer';
-import { GetInfoUser } from '../user/actions';
+import { notification } from "antd";
+import { encode } from "js-base64";
+import { Dispatch } from "react";
+import { ThunkAction } from "redux-thunk";
+import { postHttp } from "../../utils/api";
+import { Auth, BasicAuth } from "../../utils/contanst";
+import { RootState } from "../RootReducer";
+import { GetInfoUser } from "../user/actions";
+import { UserAction } from "../user/types";
+import { AuthActions, AuthActionTypes } from "./types";
 
 export const login =
   (data: { email: string; password: string }, history: any) =>

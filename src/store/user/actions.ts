@@ -1,7 +1,7 @@
-import { Dispatch } from 'react';
-import { getHttpRequest } from '../../utils/api';
-import { User } from '../../utils/contanst';
-import { UserAction, UserType, UserTypes } from './types';
+import { Dispatch } from "react";
+import { getHttpRequest } from "../../utils/api";
+import { User } from "../../utils/contanst";
+import { UserAction, UserType, UserTypes } from "./types";
 
 export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
   try {
@@ -9,8 +9,8 @@ export const GetInfoUser = () => async (dispatch: Dispatch<UserAction>) => {
       type: UserTypes.GET_USER,
     });
     const token =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem('token')
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("token")
         : null;
     const {
       data: {
@@ -40,8 +40,8 @@ export const GetUserList = () => async (dispatch: Dispatch<UserAction>) => {
       type: UserTypes.GET_USER_LIST,
     });
     const token =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem('token')
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("token")
         : null;
     const {
       data: {

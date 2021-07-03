@@ -1,15 +1,12 @@
-import { Table, Tag, Typography, Modal, Row, Col } from 'antd';
+import { Col, Modal, Row, Table, Tag, Typography } from "antd";
+import { ColumnsType } from "antd/lib/table";
+import { FC, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { baseURL } from "../../../config/axiosConfig";
+import { CategoryType } from "../../../store/category/types";
+import { ProductState, ProductType } from "../../../store/product/types";
+import { RootState } from "../../../store/RootReducer";
 
-import { ColumnsType } from 'antd/lib/table';
-import { useMemo } from 'react';
-import { useState } from 'react';
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { baseURL } from '../../../config/axiosConfig';
-
-import { CategoryType } from '../../../store/category/types';
-import { ProductState, ProductType } from '../../../store/product/types';
-import { RootState } from '../../../store/RootReducer';
 // import WrappedAuth from '../WrappedAuth';
 // import WrappedLayout from '../WrappedLayout';
 const { Text, Title } = Typography;
@@ -22,62 +19,64 @@ const ListProduct: FC = () => {
   const [product, setProduct] = useState<ProductType>();
   const Columns: ColumnsType<ProductType> = [
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Name</p>,
-      dataIndex: 'name',
-      width: '25%',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Name</p>,
+      dataIndex: "name",
+      width: "25%",
       render: (name) => (
-        <p style={{ textAlign: 'center', margin: 0 }}>{name}</p>
+        <p style={{ textAlign: "center", margin: 0 }}>{name}</p>
       ),
-      key: 'name',
+      key: "name",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Categories</p>,
-      dataIndex: 'categories',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Categories</p>,
+      dataIndex: "categories",
       render: (categories: CategoryType[]) => {
         return (
           <>
             {categories.map((category) => (
-              <Tag color='geekblue' key={category._id}>
+              <Tag color="geekblue" key={category._id}>
                 {category.name}
               </Tag>
             ))}
           </>
         );
       },
-      width: '45%',
-      key: 'categories',
+      width: "45%",
+      key: "categories",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Instock</p>,
-      dataIndex: 'instock',
-      width: '15%',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Instock</p>,
+      dataIndex: "instock",
+      width: "15%",
       render: (instock: string) => (
         <Text
           style={{
-            textAlign: 'center',
-            width: '100%',
-            display: 'inline-block',
-          }}>
+            textAlign: "center",
+            width: "100%",
+            display: "inline-block",
+          }}
+        >
           {instock}
         </Text>
       ),
-      key: 'instock',
+      key: "instock",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Price</p>,
-      dataIndex: 'price',
-      width: '15%',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Price</p>,
+      dataIndex: "price",
+      width: "15%",
       render: (price: string) => (
         <Text
           style={{
-            textAlign: 'center',
-            width: '100%',
-            display: 'inline-block',
-          }}>
+            textAlign: "center",
+            width: "100%",
+            display: "inline-block",
+          }}
+        >
           {price}
         </Text>
       ),
-      key: 'price',
+      key: "price",
     },
   ];
   const newList = useMemo(
@@ -98,7 +97,7 @@ const ListProduct: FC = () => {
               setVisible(true);
             },
             style: {
-              cursor: 'pointer',
+              cursor: "pointer",
             },
           };
         }}
@@ -108,28 +107,29 @@ const ListProduct: FC = () => {
         onCancel={() => setVisible(false)}
         visible={visible}
         // title={product?.name}
-        className='ant-footer-modal_custom'
+        className="ant-footer-modal_custom"
         title={
-          <p style={{ textAlign: 'center', marginBottom: 0 }}>
+          <p style={{ textAlign: "center", marginBottom: 0 }}>
             {product?.name}
           </p>
         }
         footer={<></>}
-        okButtonProps={{ style: { display: 'none' } }}
-        cancelButtonProps={{ style: { display: 'none' } }}>
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
         {product && (
           <>
             <img
               style={{
-                width: '50%',
-                display: 'block',
-                margin: '0 auto',
+                width: "50%",
+                display: "block",
+                margin: "0 auto",
                 marginBottom: 15,
               }}
               src={`${baseURL}/file/${product.featuredImg}`}
               alt={product.featuredImg}
             />
-            <Row style={{ width: '100%', padding: '0 50px' }}>
+            <Row style={{ width: "100%", padding: "0 50px" }}>
               {/* <Col
                 span={24}
                 style={{
@@ -145,16 +145,17 @@ const ListProduct: FC = () => {
               <Col
                 span={24}
                 style={{
-                  display: 'flex',
+                  display: "flex",
 
-                  alignItems: 'baseline',
-                }}>
+                  alignItems: "baseline",
+                }}
+              >
                 <Title level={5} style={{ fontSize: 15, margin: 0 }}>
-                  Categories:{' '}
+                  Categories:{" "}
                 </Title>
                 <div style={{ marginLeft: 10 }}>
                   {product.categories.map((category) => (
-                    <Tag color='geekblue' key={category._id}>
+                    <Tag color="geekblue" key={category._id}>
                       {category.name}
                     </Tag>
                   ))}
@@ -163,24 +164,26 @@ const ListProduct: FC = () => {
               <Col
                 span={24}
                 style={{
-                  display: 'flex',
+                  display: "flex",
 
-                  alignItems: 'baseline',
-                }}>
+                  alignItems: "baseline",
+                }}
+              >
                 <Title level={5} style={{ fontSize: 15, margin: 0 }}>
-                  Price:{' '}
+                  Price:{" "}
                 </Title>
                 <Text style={{ marginLeft: 10 }}>{product.price}</Text>
               </Col>
               <Col
                 span={24}
                 style={{
-                  display: 'flex',
+                  display: "flex",
 
-                  alignItems: 'baseline',
-                }}>
+                  alignItems: "baseline",
+                }}
+              >
                 <Title level={5} style={{ fontSize: 15, margin: 0 }}>
-                  Instock:{' '}
+                  Instock:{" "}
                 </Title>
                 <Text style={{ marginLeft: 10 }}>{product.instock}</Text>
               </Col>

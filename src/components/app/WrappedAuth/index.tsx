@@ -1,7 +1,7 @@
-import useAuth from '../../../Hook/useAuth';
-import jwt_decode from 'jwt-decode';
-import { FC, ReactNode, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import jwt_decode from "jwt-decode";
+import { FC, ReactNode, useEffect } from "react";
+import { useHistory } from "react-router";
+import useAuth from "../../../Hook/useAuth";
 
 interface Props {
   children: ReactNode;
@@ -13,7 +13,7 @@ const WrappedAuth: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (!jwtAuth) {
-      history.replace('/login');
+      history.replace("/login");
     }
   }, [jwtAuth, history]);
   useEffect(() => {
@@ -21,7 +21,7 @@ const WrappedAuth: FC<Props> = ({ children }) => {
       const currentDate = Date.now();
       const jwt_decoded = jwt_decode<{ exp: number; iat: number }>(jwtAuth);
       if (jwt_decoded.exp * 1000 < currentDate) {
-        history.replace('/logout');
+        history.replace("/logout");
       }
     }
     // eslint-disable-next-line

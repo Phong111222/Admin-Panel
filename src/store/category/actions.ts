@@ -1,43 +1,44 @@
-import { Dispatch } from 'redux';
-import { getHttpRequest } from '../../utils/api';
-import { Category } from '../../utils/contanst';
-import { CategoryAction, CategoryType, CategoryTypes } from './types';
+import { Dispatch } from "redux";
+import { getHttpRequest } from "../../utils/api";
+import { Category } from "../../utils/contanst";
+import { CategoryAction, CategoryType, CategoryTypes } from "./types";
 
-export const GetListCategories =
-  () => async (dispatch: Dispatch<CategoryAction>) => {
-    try {
-      dispatch({
-        type: CategoryTypes.GET_LIST_CATEGORIES,
-      });
-      const token =
-        typeof window !== 'undefined'
-          ? window.localStorage.getItem('token')
-          : null;
-      const {
-        data: {
-          data: { categories: list },
-        },
-      } = await getHttpRequest(Category.LIST_CATEGORIES_AND_CREATE, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      dispatch({
-        type: CategoryTypes.GET_LIST_CATEGORIES_SUCCESS,
-        payload: {
-          list,
-        },
-      });
-    } catch (error) {
-      const { data } = error.response;
-      dispatch({
-        type: CategoryTypes.GET_LIST_CATEGORIES_FAIL,
-        payload: {
-          error: data,
-        },
-      });
-    }
-  };
+export const GetListCategories = () => async (
+  dispatch: Dispatch<CategoryAction>
+) => {
+  try {
+    dispatch({
+      type: CategoryTypes.GET_LIST_CATEGORIES,
+    });
+    const token =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("token")
+        : null;
+    const {
+      data: {
+        data: { categories: list },
+      },
+    } = await getHttpRequest(Category.LIST_CATEGORIES_AND_CREATE, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({
+      type: CategoryTypes.GET_LIST_CATEGORIES_SUCCESS,
+      payload: {
+        list,
+      },
+    });
+  } catch (error) {
+    const { data } = error.response;
+    dispatch({
+      type: CategoryTypes.GET_LIST_CATEGORIES_FAIL,
+      payload: {
+        error: data,
+      },
+    });
+  }
+};
 
 export const ToggleCategory = (_id: string): CategoryAction => {
   return {

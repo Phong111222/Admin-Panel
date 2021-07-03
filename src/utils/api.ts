@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from 'axios';
-import AxiosConfig from '../config/axiosConfig';
+import { AxiosRequestConfig } from "axios";
+import AxiosConfig from "../config/axiosConfig";
 
 export const postHttp = (
   url: string,

@@ -1,6 +1,6 @@
-import { Typography } from 'antd';
+import { Typography } from "antd";
+import { CSSProperties, FC, ReactNode } from "react";
 
-import { CSSProperties, FC, ReactNode } from 'react';
 const { Title, Text } = Typography;
 const Label: FC<{ children: ReactNode; style?: CSSProperties }> = ({
   children,
