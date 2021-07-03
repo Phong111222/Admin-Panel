@@ -1,30 +1,30 @@
-import { Row, Col, Button, Form, Upload, Input, Radio } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-import { useDispatch, useSelector } from 'react-redux';
-import getBase64 from '../../../utils/getBase64';
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, Radio, Row, Upload } from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store/RootReducer";
 import {
   CreateStaff,
-  CreateStaffSucces,
   CreateStaffFail,
-} from '../../../store/staff/actions';
-import Label from '../../common/Label';
-import { useState } from 'react';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { StaffState } from '../../../store/staff/types';
-import { RootState } from '../../../store/RootReducer';
-import ShowError from '../../../utils/showError';
-import { postHttp } from '../../../utils/api';
-import { Staff } from '../../../utils/contanst';
-import ShowSuccess from '../../../utils/showSuccess';
+  CreateStaffSucces,
+} from "../../../store/staff/actions";
+import { StaffState } from "../../../store/staff/types";
+import { postHttp } from "../../../utils/api";
+import { Staff } from "../../../utils/contanst";
+import getBase64 from "../../../utils/getBase64";
+import ShowError from "../../../utils/showError";
+import ShowSuccess from "../../../utils/showSuccess";
+import Label from "../../common/Label";
 const formFields = [
-  'firstname',
-  'lastname',
-  'gender',
-  'phone',
-  'avatar',
-  'address',
-  'company',
-  'contactEmail',
+  "firstname",
+  "lastname",
+  "gender",
+  "phone",
+  "avatar",
+  "address",
+  "company",
+  "contactEmail",
 ];
 const StaffCreate = () => {
   const dispatch = useDispatch();
@@ -35,22 +35,23 @@ const StaffCreate = () => {
   const [image, setImage] = useState<{
     url: string;
     img: any;
-  }>({ url: '', img: null });
+  }>({ url: "", img: null });
   const [form] = useForm();
   const UploadButton = () => {
     return (
       <div
         style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          background: '#FAFAFA',
-          border: 'dotted 0.5px #686565',
-          cursor: 'pointer',
-        }}>
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          background: "#FAFAFA",
+          border: "dotted 0.5px #686565",
+          cursor: "pointer",
+        }}
+      >
         <div>{loadingImage ? <LoadingOutlined /> : <PlusOutlined />}</div>
         <div style={{ marginTop: 8 }}>Upload</div>
       </div>
@@ -62,13 +63,13 @@ const StaffCreate = () => {
     contactEmail: string;
     avatar: any;
     company: string;
-    gender: 'male' | 'female';
+    gender: "male" | "female";
     phone: string;
     address: string;
   }) => {
     try {
       dispatch(CreateStaff());
-      const token = window.localStorage.getItem('token') || null;
+      const token = window.localStorage.getItem("token") || null;
       const {
         data: {
           data: { newStaff },
@@ -78,9 +79,9 @@ const StaffCreate = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      ShowSuccess('CREATE STAFF SUCCESS');
+      ShowSuccess("CREATE STAFF SUCCESS");
       form.resetFields(formFields);
-      setImage({ url: '', img: null });
+      setImage({ url: "", img: null });
       dispatch(CreateStaffSucces(newStaff));
     } catch (error) {
       const { message } = error.response.data;
@@ -96,28 +97,31 @@ const StaffCreate = () => {
     <>
       <Form
         form={form}
-        labelAlign='left'
+        labelAlign="left"
         labelCol={{ span: 24 }}
-        onFinish={onFinish}>
+        onFinish={onFinish}
+      >
         <Row>
           <Col span={7}>
             <Row>
               <Col span={24}>
                 <Form.Item
-                  name='firstname'
-                  rules={[{ required: true, message: 'Firstname is required' }]}
-                  label={<Label>Firstname</Label>}>
+                  name="firstname"
+                  rules={[{ required: true, message: "Firstname is required" }]}
+                  label={<Label>Firstname</Label>}
+                >
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={8} className='uploadContainer'>
+              <Col span={8} className="uploadContainer">
                 <Form.Item
                   label={<Label>Avatar</Label>}
-                  className='formUpload'
-                  name='avatar'>
+                  className="formUpload"
+                  name="avatar"
+                >
                   <Upload
                     accept={`.jpg,.png,.PNG,.JPG`}
-                    className='featuredImg_uploader'
+                    className="featuredImg_uploader"
                     showUploadList={false}
                     onChange={(info) => {
                       console.log(info.file);
@@ -131,12 +135,13 @@ const StaffCreate = () => {
                           img: info.file.originFileObj,
                         });
                       });
-                    }}>
+                    }}
+                  >
                     {image.url.length ? (
                       <img
                         src={image.url}
                         alt={image.url}
-                        style={{ width: '100%', overflow: 'hidden' }}
+                        style={{ width: "100%", overflow: "hidden" }}
                       />
                     ) : (
                       <UploadButton />
@@ -151,32 +156,35 @@ const StaffCreate = () => {
             <Row>
               <Col span={24}>
                 <Form.Item
-                  name='lastname'
-                  rules={[{ required: true, message: 'Firstname is required' }]}
-                  label={<Label>Lastname</Label>}>
+                  name="lastname"
+                  rules={[{ required: true, message: "Firstname is required" }]}
+                  label={<Label>Lastname</Label>}
+                >
                   <Input />
                 </Form.Item>
               </Col>
               <Col span={24}>
                 <Form.Item
-                  name='contactEmail'
-                  rules={[{ required: true, message: 'Email is required' }]}
-                  label={<Label>Email</Label>}>
+                  name="contactEmail"
+                  rules={[{ required: true, message: "Email is required" }]}
+                  label={<Label>Email</Label>}
+                >
                   <Input />
                 </Form.Item>
               </Col>
               <Col span={24}>
                 <Form.Item
-                  name='gender'
+                  name="gender"
                   label={<Label>Gender</Label>}
-                  rules={[{ required: true, message: 'Gender is requied' }]}>
+                  rules={[{ required: true, message: "Gender is requied" }]}
+                >
                   <Radio.Group>
-                    <Row style={{ width: '100%' }}>
+                    <Row style={{ width: "100%" }}>
                       <Col>
-                        <Radio value='male'>Male</Radio>
+                        <Radio value="male">Male</Radio>
                       </Col>
                       <Col>
-                        <Radio value='female'>Female</Radio>
+                        <Radio value="female">Female</Radio>
                       </Col>
                     </Row>
                   </Radio.Group>
@@ -187,24 +195,24 @@ const StaffCreate = () => {
           <Col offset={1} span={7}>
             <Row>
               <Col span={24}>
-                <Form.Item name='address' label={<Label>Address</Label>}>
+                <Form.Item name="address" label={<Label>Address</Label>}>
                   <Input />
                 </Form.Item>
               </Col>
               <Col span={24}>
-                <Form.Item name='phone' label={<Label>Phone</Label>}>
+                <Form.Item name="phone" label={<Label>Phone</Label>}>
                   <Input />
                 </Form.Item>
               </Col>
               <Col span={24}>
-                <Form.Item name='company' label={<Label>Company</Label>}>
+                <Form.Item name="company" label={<Label>Company</Label>}>
                   <Input />
                 </Form.Item>
               </Col>
             </Row>
           </Col>
           <Col span={24}>
-            <Button htmlType='submit' type='primary' loading={loading}>
+            <Button htmlType="submit" type="primary" loading={loading}>
               Create
             </Button>
           </Col>

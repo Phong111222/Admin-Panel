@@ -1,10 +1,10 @@
-import { Reducer } from 'redux';
+import { Reducer } from "redux";
 import {
   ProductActions,
   ProductState,
   ProductType,
   ProductTypes,
-} from './types';
+} from "./types";
 
 const initialState: ProductState = {
   loading: false,

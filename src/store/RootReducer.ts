@@ -6,6 +6,7 @@ import productReducer from './product/reducer';
 import roleReducer from './role/reducer';
 import staffReducer from './staff/reducer';
 import analyticReducer from './analytics/reducer';
+
 const RootReducer = combineReducers({
   Auth: AuthReducer,
   user: UserReducer,

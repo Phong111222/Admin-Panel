@@ -1,13 +1,13 @@
-import { ProductType } from '../product/types';
+import { ProductType } from "../product/types";
 
 export const StaffTypes = {
-  GET_STAFF_LIST: 'staff/GET_STAFF_LIST',
-  GET_STAFF_LIST_FAIL: 'staff/GET_STAFF_LIST_FAIL',
-  GET_STAFF_LIST_SUCCESS: 'staff/GET_STAFF_LIST_SUCCESS',
-  CREATE_STAFF: 'staff/CREATE_STAFF',
-  CREATE_STAFF_FAIL: 'staff/CREATE_STAFF_FAIL',
-  CREATE_STAFF_SUCCESS: 'staff/CREATE_STAFF_SUCCESS',
-  TOGGLE_STAFF: 'staff/TOGGLE_STAFF',
+  GET_STAFF_LIST: "staff/GET_STAFF_LIST",
+  GET_STAFF_LIST_FAIL: "staff/GET_STAFF_LIST_FAIL",
+  GET_STAFF_LIST_SUCCESS: "staff/GET_STAFF_LIST_SUCCESS",
+  CREATE_STAFF: "staff/CREATE_STAFF",
+  CREATE_STAFF_FAIL: "staff/CREATE_STAFF_FAIL",
+  CREATE_STAFF_SUCCESS: "staff/CREATE_STAFF_SUCCESS",
+  TOGGLE_STAFF: "staff/TOGGLE_STAFF",
 };
 
 export interface StaffType {
