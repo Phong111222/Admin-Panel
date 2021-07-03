@@ -180,6 +180,18 @@ const routes: type[] = [
     id: "staff_list",
     exact: true,
   },
+  {
+    name: 'Invoice',
+    component: React.lazy(() =>
+      Promise.all([
+        import('../components/app/Invoice/InvoiceList'),
+        new Promise((resolve) => setTimeout(resolve, 100)),
+      ]).then(([moduleExports]) => moduleExports)
+    ),
+    path: '/invoice/list',
+    id: 'invoice_list',
+    exact: true,
+  },
 ];
 
 const MakeRoute = () => {

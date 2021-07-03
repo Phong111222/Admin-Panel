@@ -7,6 +7,8 @@ import roleReducer from './role/reducer';
 import staffReducer from './staff/reducer';
 import analyticReducer from './analytics/reducer';
 
+import invoiceReducer from './invoice/reducer';
+
 const RootReducer = combineReducers({
   Auth: AuthReducer,
   user: UserReducer,
@@ -15,6 +17,7 @@ const RootReducer = combineReducers({
   role: roleReducer,
   staff: staffReducer,
   analytic: analyticReducer,
+  invoice: invoiceReducer,
 });
 
 export type RootState = ReturnType<typeof RootReducer>;

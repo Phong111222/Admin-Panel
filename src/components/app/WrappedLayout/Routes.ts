@@ -1,5 +1,6 @@
 import {
   ContactsOutlined,
+  FileOutlined,
   ShoppingCartOutlined,
   TagOutlined,
   UserAddOutlined,
@@ -56,7 +57,21 @@ export const ROUTES = [
     ],
   },
   {
-    route: "category",
+
+    route: 'invoice',
+    icon: FileOutlined,
+    methods: [
+      {
+        httpRequest: 'GET',
+        title: 'Invoice list',
+        path: '/invoice/list',
+      },
+    ],
+  },
+  {
+    route: 'category',
+
+   
     icon: TagOutlined,
     methods: [
       {

@@ -21,6 +21,7 @@ const persistConfig = {
     'role',
     'staff',
     'analytic',
+    'invoice',
   ],
 
 };
