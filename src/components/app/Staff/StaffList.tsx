@@ -2,18 +2,34 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
 import { StaffState, StaffType } from '../../../store/staff/types';
-import { Row, Col, Card, Button, Avatar, Typography, Pagination } from 'antd';
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  Avatar,
+  Typography,
+  Pagination,
+  Modal,
+} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { ToggleStaff } from '../../../store/staff/actions';
 import AxiosConfig from '../../../config/axiosConfig';
 import { Staff } from '../../../utils/contanst';
+import EditStaff from './EditStaff';
+import { useForm } from 'antd/lib/form/Form';
+import { useHistory } from 'react-router';
+
 const { Title, Text } = Typography;
 const pageSize = 8;
 
 const StaffList = () => {
+  const history = useHistory();
+  const [visible, setVisible] = useState<boolean>(false);
+  const [staff, setStaff] = useState<any>(null);
   const dispatch = useDispatch();
   const { list } = useSelector<RootState, StaffState>((state) => state.staff);
-
+  const [form] = useForm();
   const [renderList, setRenderList] = useState<StaffType[]>(() => {
     const renderList: StaffType[] = [];
     for (
@@ -38,7 +54,17 @@ const StaffList = () => {
     );
     setRenderList(newList);
   };
-
+  const cancelModal = () => {
+    setVisible(false);
+  };
+  const handleChooseStaff = (staff: StaffType) => {
+    setStaff(staff);
+    setVisible(true);
+    history.push(`/staff/list?id=${staff._id}`);
+  };
+  const makeRenderList = (newlist: StaffType[]) => {
+    setRenderList(newlist);
+  };
   return (
     <>
       <Row style={{ width: '85%', margin: '0 auto' }}>
@@ -50,7 +76,8 @@ const StaffList = () => {
             style={{
               padding: '0 15px',
               marginBottom: 15,
-            }}>
+            }}
+            onClick={() => handleChooseStaff(staff)}>
             <Card hoverable style={{ borderRadius: 10 }}>
               <Row align='middle'>
                 <Col span={3}>
@@ -121,6 +148,15 @@ const StaffList = () => {
           setRenderList(newList);
         }}
       />
+      <Modal visible={visible} width={800} footer={null} onCancel={cancelModal}>
+        <EditStaff
+          form={form}
+          renderList={renderList}
+          cancelModal={cancelModal}
+          staff={staff}
+          makeRenderList={makeRenderList}
+        />
+      </Modal>
     </>
   );
 };

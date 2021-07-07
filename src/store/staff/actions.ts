@@ -58,3 +58,28 @@ export const CreateStaffFail = (error: any): StaffActions => ({
     error,
   },
 });
+
+export const UpdateStaff = (): StaffActions => {
+  return {
+    type: StaffTypes.UPDATE_STAFF,
+  };
+};
+
+export const UpdateStaffSuccess = (
+  updatedStaff: any,
+  id: string
+): StaffActions => {
+  return {
+    type: StaffTypes.UPDATE_STAFF_SUCCESS,
+    payload: {
+      newStaff: updatedStaff,
+      staffID: id,
+    },
+  };
+};
+export const UpdateStaffFail = (error: any): StaffActions => ({
+  type: StaffTypes.UPDATE_STAFF_FAIL,
+  payload: {
+    error,
+  },
+});

@@ -4,78 +4,70 @@ import { Form, Row, Col, Button, Input, Avatar, Radio } from 'antd';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import AxiosConfig from '../../../config/axiosConfig';
-import { RoleState } from '../../../store/role/types';
-import { RootState } from '../../../store/RootReducer';
+
 import {
-  UpdateUser,
-  UpdateUserFail,
-  UpdateUserSuccess,
-} from '../../../store/user/actions';
-import { UserType } from '../../../store/user/types';
-import { User } from '../../../utils/contanst';
+  UpdateStaff,
+  UpdateStaffFail,
+  UpdateStaffSuccess,
+} from '../../../store/staff/actions';
+import { StaffType } from '../../../store/staff/types';
+
+import { Staff } from '../../../utils/contanst';
 import Label from '../../common/Label';
 
 interface Props {
   form: FormInstance;
-  user: UserType;
+  staff: StaffType;
   cancelModal: () => void;
-  renderList: UserType[];
+  renderList: StaffType[];
   makeRenderList: (params: any) => void;
 }
-const EditUser: FC<Props> = ({
+const EditStaff: FC<Props> = ({
   form,
-  user,
+  staff,
   cancelModal,
   renderList,
   makeRenderList,
 }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
-  const { list } = useSelector<RootState, RoleState>((state) => state.role);
+
   const onFinish = async (values: any) => {
     try {
       setLoading(true);
-      dispatch(UpdateUser());
+      dispatch(UpdateStaff());
       const token = window.localStorage.getItem('token') || null;
       const {
         data: {
-          data: { updatedUser },
+          data: { updatedStaff },
         },
-      } = await AxiosConfig.patch(User.update(user._id), values, {
+      } = await AxiosConfig.patch(Staff.update(staff._id), values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const newList = renderList.map((item) =>
-        item._id === user._id ? { ...item, ...updatedUser } : item
+        item._id === staff._id ? { ...item, ...updatedStaff } : item
       );
 
       makeRenderList(newList);
       setLoading(false);
       cancelModal();
-      dispatch(UpdateUserSuccess(updatedUser, user._id));
-      form.resetFields([
-        'fullname',
-        'email',
-        'password',
-        'role',
-        'address',
-        'company',
-        'phone',
-        'birthday',
-      ]);
+      dispatch(UpdateStaffSuccess(updatedStaff, staff._id));
     } catch (error) {
       setLoading(false);
-      dispatch(UpdateUserFail(error.response));
+      dispatch(UpdateStaffFail(error.response));
     }
   };
 
   useEffect(() => {
     form.setFieldsValue({
-      fullname: user.fullname,
-      email: user.email,
+      firstname: staff.firstname,
+      lastname: staff.lastname,
+      contactEmail: staff.contactEmail,
     });
   });
   return (
@@ -100,15 +92,23 @@ const EditUser: FC<Props> = ({
           </Col>
           <Col span={11}>
             <Form.Item
-              name='fullname'
-              label={<Label>Fullname</Label>}
-              rules={[{ required: true, message: 'Fullname is required' }]}>
+              name='firstname'
+              label={<Label>First name</Label>}
+              rules={[{ required: true, message: 'First name is required' }]}>
               <Input />
             </Form.Item>
           </Col>
           <Col offset={2} span={11}>
             <Form.Item
-              name='email'
+              name='lastname'
+              label={<Label>Last name</Label>}
+              rules={[{ required: true, message: 'Last name is required' }]}>
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={11}>
+            <Form.Item
+              name='contactEmail'
               label={<Label>Email</Label>}
               rules={[
                 { required: true, message: 'Email is required' },
@@ -120,24 +120,36 @@ const EditUser: FC<Props> = ({
               <Input />
             </Form.Item>
           </Col>
-          <Col span={11}>
-            <Form.Item
-              name='password'
-              label={<Label>Password</Label>}
-              rules={[
-                { required: true, message: 'Password is required' },
-                { min: 8, message: 'Password must have at least 8 characters' },
-              ]}>
-              <Input.Password />
-            </Form.Item>
-          </Col>
+
           <Col offset={2} span={11}>
             <Form.Item name='phone' label={<Label>Phone</Label>}>
               <Input />
             </Form.Item>
           </Col>
           <Col span={11}>
+            <Form.Item
+              name='gender'
+              label={<Label>Gender</Label>}
+              rules={[{ required: true, message: 'Gender is requied' }]}>
+              <Radio.Group>
+                <Row style={{ width: '100%' }}>
+                  <Col>
+                    <Radio value='male'>Male</Radio>
+                  </Col>
+                  <Col>
+                    <Radio value='female'>Female</Radio>
+                  </Col>
+                </Row>
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          <Col offset={2} span={11}>
             <Form.Item name='birtday' label={<Label>Birthday</Label>}>
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={11}>
+            <Form.Item name='address' label={<Label>Address</Label>}>
               <Input />
             </Form.Item>
           </Col>
@@ -146,31 +158,9 @@ const EditUser: FC<Props> = ({
               <Input />
             </Form.Item>
           </Col>
-          <Col span={24}>
-            <Form.Item name='address' label={<Label>Address</Label>}>
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item
-              name='role'
-              label={<Label>Role</Label>}
-              rules={[{ required: true, message: 'Role is required' }]}>
-              <Radio.Group>
-                <Row>
-                  {list.map((role) =>
-                    role.isActive ? (
-                      <Col key={role._id} style={{ marginBottom: 10 }}>
-                        <Radio value={role._id}>{role.name}</Radio>
-                      </Col>
-                    ) : null
-                  )}
-                </Row>
-              </Radio.Group>
-            </Form.Item>
-          </Col>
+
           <Col
-            span={24}
+            offset={24}
             style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Form.Item>
               <Button type='primary' htmlType='submit' loading={loading}>
@@ -184,4 +174,4 @@ const EditUser: FC<Props> = ({
   );
 };
 
-export default EditUser;
+export default EditStaff;

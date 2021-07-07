@@ -94,6 +94,8 @@ const UserReducer: Reducer<UserState, UserAction> = (
       );
       return { ...state, loading: false, list: newList };
     }
+    case UserTypes.UPDATE_USER_FAIL:
+      return { ...state, error: action.payload?.error };
     case UserTypes.RESET_USER:
       return { ...initialState };
 

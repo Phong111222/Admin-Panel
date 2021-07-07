@@ -42,6 +42,19 @@ const staffReducer: Reducer<StaffState, StaffActions> = (
     }
     case StaffTypes.CREATE_STAFF_FAIL:
       return { ...state, loading: false, error: action.payload?.error };
+    case StaffTypes.UPDATE_STAFF:
+      return { ...state, loading: true };
+    case StaffTypes.UPDATE_STAFF_SUCCESS: {
+      const updatedStaff = action.payload?.newStaff;
+      const newList = state.list.map((staff) =>
+        staff._id === action.payload?.staffID
+          ? { ...staff, ...updatedStaff }
+          : staff
+      );
+      return { ...state, loading: false, list: newList };
+    }
+    case StaffTypes.UPDATE_STAFF_FAIL:
+      return { ...state, error: action.payload?.error };
     default:
       return state;
   }

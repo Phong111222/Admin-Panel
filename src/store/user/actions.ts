@@ -115,3 +115,9 @@ export const UpdateUserSuccess = (updatedUser: any, id: string): UserAction => {
     },
   };
 };
+export const UpdateUserFail = (error: any): UserAction => ({
+  type: UserTypes.UPDATE_USER_SUCCESS,
+  payload: {
+    error,
+  },
+});

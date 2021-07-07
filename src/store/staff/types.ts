@@ -8,6 +8,10 @@ export const StaffTypes = {
   CREATE_STAFF_FAIL: 'staff/CREATE_STAFF_FAIL',
   CREATE_STAFF_SUCCESS: 'staff/CREATE_STAFF_SUCCESS',
   TOGGLE_STAFF: 'staff/TOGGLE_STAFF',
+  UPDATE_STAFF: 'staff/UPDATE_STAFF',
+
+  UPDATE_STAFF_SUCCESS: 'staff/UPDATE_STAFF_SUCCESS',
+  UPDATE_STAFF_FAIL: 'staff/UPDATE_STAFF_FAIL',
 };
 
 export interface StaffType {
@@ -60,7 +64,10 @@ export interface StaffActions {
     | typeof StaffTypes.GET_STAFF_LIST
     | typeof StaffTypes.GET_STAFF_LIST_FAIL
     | typeof StaffTypes.TOGGLE_STAFF
-    | typeof StaffTypes.GET_STAFF_LIST_SUCCESS;
+    | typeof StaffTypes.GET_STAFF_LIST_SUCCESS
+    | typeof StaffTypes.UPDATE_STAFF
+    | typeof StaffTypes.UPDATE_STAFF_FAIL
+    | typeof StaffTypes.UPDATE_STAFF_SUCCESS;
 
   payload?: StaffPayload;
 }
