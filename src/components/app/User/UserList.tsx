@@ -1,18 +1,35 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
 import { UserState, UserType } from '../../../store/user/types';
-import { Row, Col, Card, Button, Avatar, Pagination, Typography } from 'antd';
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  Avatar,
+  Pagination,
+  Typography,
+  Modal,
+} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { ToggleUser } from '../../../store/user/actions';
 import AxiosConfig from '../../../config/axiosConfig';
 import { User } from '../../../utils/contanst';
+import EditUser from './EditUser';
+import { useForm } from 'antd/lib/form/Form';
+import { useHistory } from 'react-router';
+
 const { Title, Text } = Typography;
 const pageSize = 10;
 const UserList = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { list } = useSelector<RootState, UserState>((state) => state.user);
-
+  const { list, edit_permission } = useSelector<RootState, UserState>(
+    (state) => state.user
+  );
+  const [visible, setVisible] = useState<boolean>(false);
+  const [user, setUser] = useState<any>(null);
   const [renderList, setRenderList] = useState<UserType[]>(() => {
     const renderList: UserType[] = [];
     for (
@@ -38,6 +55,22 @@ const UserList = () => {
     });
     setRenderList(newList);
   };
+  const [form] = useForm();
+  const handleChooseUser = (user: UserType) => {
+    if (edit_permission) {
+      setUser(user);
+      setVisible(true);
+      history.replace(`/user/list?edit=${edit_permission}&userID=${user._id}`);
+    } else {
+      setVisible(false);
+    }
+  };
+  const cancelModal = () => {
+    setVisible(false);
+  };
+  const MakeNewRenderList = (renderList: UserType[]) => {
+    setRenderList(renderList);
+  };
   return (
     <>
       <Row style={{ width: '85%', margin: '0 auto' }}>
@@ -49,7 +82,8 @@ const UserList = () => {
             style={{
               padding: '0 15px',
               marginBottom: 15,
-            }}>
+            }}
+            onClick={() => handleChooseUser(user)}>
             <Card hoverable style={{ borderRadius: 10 }}>
               <Row align='middle'>
                 <Col span={3}>
@@ -102,6 +136,15 @@ const UserList = () => {
           setRenderList(newList);
         }}
       />
+      <Modal onCancel={cancelModal} visible={visible} footer={null} width={800}>
+        <EditUser
+          form={form}
+          user={user}
+          cancelModal={cancelModal}
+          renderList={renderList}
+          makeRenderList={MakeNewRenderList}
+        />
+      </Modal>
     </>
   );
 };

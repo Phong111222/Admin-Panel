@@ -58,7 +58,7 @@ const routes: type[] = [
     ),
     path: '/product/list',
     id: 'products_list',
-    exact: true,
+    exact: false,
   },
   {
     name: 'product',
@@ -70,7 +70,7 @@ const routes: type[] = [
     ),
     path: '/product/create',
     id: 'products_create',
-    exact: true,
+    exact: false,
   },
   {
     name: 'category',
@@ -82,7 +82,7 @@ const routes: type[] = [
     ),
     path: '/category/list',
     id: 'category_list',
-    exact: true,
+    exact: false,
   },
   {
     name: 'category',
@@ -94,7 +94,7 @@ const routes: type[] = [
     ),
     path: '/category/create',
     id: 'category_create',
-    exact: true,
+    exact: false,
   },
   {
     name: 'role',
@@ -106,7 +106,7 @@ const routes: type[] = [
     ),
     path: '/role/list',
     id: 'role_create',
-    exact: true,
+    exact: false,
   },
   {
     name: 'role',
@@ -118,7 +118,7 @@ const routes: type[] = [
     ),
     path: '/role/create',
     id: 'role_list',
-    exact: true,
+    exact: false,
   },
   {
     name: 'account',
@@ -130,7 +130,7 @@ const routes: type[] = [
     ),
     path: '/account/info',
     id: 'account_info',
-    exact: true,
+    exact: false,
   },
   {
     name: 'user',
@@ -142,7 +142,7 @@ const routes: type[] = [
     ),
     path: '/user/list',
     id: 'user_list',
-    exact: true,
+    exact: false,
   },
   {
     name: 'user',
@@ -154,8 +154,9 @@ const routes: type[] = [
     ),
     path: '/user/create',
     id: 'user_create',
-    exact: true,
+    exact: false,
   },
+
   {
     name: 'staff',
     component: React.lazy(() =>
@@ -166,7 +167,7 @@ const routes: type[] = [
     ),
     path: '/staff/create',
     id: 'staff_create',
-    exact: true,
+    exact: false,
   },
   {
     name: 'staff',
@@ -178,7 +179,7 @@ const routes: type[] = [
     ),
     path: '/staff/list',
     id: 'staff_list',
-    exact: true,
+    exact: false,
   },
   {
     name: 'Invoice',
@@ -190,7 +191,7 @@ const routes: type[] = [
     ),
     path: '/invoice/list',
     id: 'invoice_list',
-    exact: true,
+    exact: false,
   },
 ];
 

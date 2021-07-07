@@ -2,6 +2,7 @@ import { Reducer } from 'redux';
 import { UserAction, UserState, UserType, UserTypes } from './types';
 
 const initialState: UserState = {
+  edit_permission: false,
   loading: false,
   role: {
     id: '',
@@ -35,8 +36,12 @@ const UserReducer: Reducer<UserState, UserAction> = (
       return { ...state, loading: true, user: { ...state.user } };
     case UserTypes.GET_USER_COMPLETE: {
       const user = action.payload?.user as UserType;
+
       return {
         ...state,
+        edit_permission:
+          action.payload?.methods?.includes('PATCH') ||
+          (action.payload?.methods?.includes('ALL') as boolean),
         loading: false,
         role: {
           id: user?.role as string,
@@ -79,6 +84,15 @@ const UserReducer: Reducer<UserState, UserAction> = (
         ...state,
         list: [...newList],
       };
+    }
+    case UserTypes.UPDATE_USER:
+      return { ...state, loading: true };
+    case UserTypes.UPDATE_USER_SUCCESS: {
+      const updatedUser = action.payload?.newUser;
+      const newList = state.list.map((user) =>
+        user._id === action.payload?.userID ? { ...user, ...updatedUser } : user
+      );
+      return { ...state, loading: false, list: newList };
     }
     case UserTypes.RESET_USER:
       return { ...initialState };

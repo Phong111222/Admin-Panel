@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { AuthActions, AuthActionTypes, AuthState } from './types';
-const initialState = {
+const initialState: AuthState = {
   sending_login: false,
   sending_register: false,
   message: {

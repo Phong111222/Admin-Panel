@@ -1,4 +1,5 @@
 import { Dispatch } from 'react';
+
 import { getHttpRequest } from '../../utils/api';
 import { User } from '../../utils/contanst';
 import { UserAction, UserType, UserTypes } from './types';
@@ -59,11 +60,10 @@ export const GetUserList = () => async (dispatch: Dispatch<UserAction>) => {
       },
     });
   } catch (error) {
-    const { data } = error.reponse;
     dispatch({
       type: UserTypes.GET_USER_LIST_FAIL,
       payload: {
-        error: data,
+        error: error.reponse,
       },
     });
   }
@@ -99,3 +99,19 @@ export const ToggleUser = (userID: string): UserAction => ({
     userID,
   },
 });
+
+export const UpdateUser = (): UserAction => {
+  return {
+    type: UserTypes.UPDATE_USER,
+  };
+};
+
+export const UpdateUserSuccess = (updatedUser: any, id: string): UserAction => {
+  return {
+    type: UserTypes.UPDATE_USER_SUCCESS,
+    payload: {
+      newUser: updatedUser,
+      userID: id,
+    },
+  };
+};

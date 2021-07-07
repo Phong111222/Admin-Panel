@@ -26,11 +26,13 @@ export const Staff = {
 export const Category = {
   LIST_CATEGORIES_AND_CREATE: '/category',
   GET_AND_TOGGLE_BY_ID: (id: string) => `/category/${id}`,
+  UPDATE: (id: string) => `/category/updateOne/${id}`,
 };
 
 export const Product = {
   LIST_PRODUCTS_CREATE_PRODUCT: '/product',
   TOGGLE_AND_GET_BY_ID: (id: string) => `/prodcut/${id}`,
+  UPDATE: (id: string) => `/product/updateOne/${id}`,
 };
 
 export const Role = {
