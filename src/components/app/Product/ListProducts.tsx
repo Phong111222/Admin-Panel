@@ -149,7 +149,7 @@ const ListProduct: FC = () => {
       key: 'instock',
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Price</p>,
+      title: <p style={{ textAlign: 'center', margin: 0 }}>Price (VND)</p>,
       dataIndex: 'price',
       width: '15%',
       render: (price: string) => (
@@ -159,7 +159,12 @@ const ListProduct: FC = () => {
             width: '100%',
             display: 'inline-block',
           }}>
-          {price}
+          {Intl.NumberFormat('vi-VN', {
+            currency: 'VND',
+          })
+            .format(Number(price))
+            .toString()
+            .replace(/\./g, ',')}
         </Text>
       ),
       key: 'price',
