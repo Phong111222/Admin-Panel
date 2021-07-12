@@ -1,6 +1,7 @@
-import { ProductType } from '../product/types';
+import { ProductType } from "../product/types";
 
 export const StaffTypes = {
+
   GET_STAFF_LIST: 'staff/GET_STAFF_LIST',
   GET_STAFF_LIST_FAIL: 'staff/GET_STAFF_LIST_FAIL',
   GET_STAFF_LIST_SUCCESS: 'staff/GET_STAFF_LIST_SUCCESS',
@@ -12,6 +13,7 @@ export const StaffTypes = {
 
   UPDATE_STAFF_SUCCESS: 'staff/UPDATE_STAFF_SUCCESS',
   UPDATE_STAFF_FAIL: 'staff/UPDATE_STAFF_FAIL',
+
 };
 
 export interface StaffType {

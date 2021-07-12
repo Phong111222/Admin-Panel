@@ -1,4 +1,5 @@
 export const UserTypes = {
+
   GET_USER: 'user/GET_USER_INFO',
   GET_USER_COMPLETE: 'user/GET_USER_COMPLETE',
   RESET_USER: 'user/RESET_USER',
@@ -12,6 +13,7 @@ export const UserTypes = {
   UPDATE_USER: 'user/UPDATE_USER',
   UPDATE_USER_SUCCESS: 'user/UPDATE_USER_SUCCESS',
   UPDATE_USER_FAIL: 'user/UPDATE_USER_FAIL',
+
 };
 
 export interface UserType {

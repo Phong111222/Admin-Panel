@@ -1,4 +1,5 @@
 export const CategoryTypes = {
+
   GET_LIST_CATEGORIES: 'category/GET_LIST_CATEGORIES',
   GET_LIST_CATEGORIES_SUCCESS: 'category/GET_LIST_CATEGORIES_SUCCESS',
   GET_LIST_CATEGORIES_FAIL: 'category/GET_LIST_CATEGORIES_FAIL',
@@ -9,6 +10,7 @@ export const CategoryTypes = {
   UPDATE_CATEGORY: 'category/UPDATE_CATEGORY',
   UPDATE_CATEGORY_SUCCESS: 'category/UPDATE_CATEGORY_SUCCESS',
   UPDATE_CATEGORY_FAIL: 'category/UPDATE_CATEGORY_FAIL',
+
 };
 
 export interface CategoryType {

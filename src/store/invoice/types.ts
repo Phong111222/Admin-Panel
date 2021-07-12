@@ -1,4 +1,4 @@
-import { ProductType } from '../product/types';
+import { ProductType } from "../product/types";
 
 export const InvoiceTypes = {
   GET_LIST_INVOICES: 'invoice/GET_LIST_INVOICES',

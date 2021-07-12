@@ -1,14 +1,14 @@
-import { Dispatch } from 'redux';
-import { getHttpRequest } from '../../utils/api';
-import { Staff } from '../../utils/contanst';
-import { StaffActions, StaffType, StaffTypes } from './types';
+import { Dispatch } from "redux";
+import { getHttpRequest } from "../../utils/api";
+import { Staff } from "../../utils/contanst";
+import { StaffActions, StaffType, StaffTypes } from "./types";
 
 export const GetStaffList = () => async (dispatch: Dispatch<StaffActions>) => {
   try {
     dispatch({
       type: StaffTypes.GET_STAFF_LIST,
     });
-    const token = window.localStorage.getItem('token') || null;
+    const token = window.localStorage.getItem("token") || null;
     const {
       data: {
         data: { staffs: list },

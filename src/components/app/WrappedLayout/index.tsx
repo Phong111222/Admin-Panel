@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb, Row, Col, Avatar, Typography } from 'antd';
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Breadcrumb, Col, Layout, Menu, Row, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router";
+import { Link } from "react-router-dom";
+import { RootState } from "../../../store/RootReducer";
+import { UserState } from "../../../store/user/types";
+import Logo from "../../Logo";
+import { ROUTES } from "./Routes";
+import styles from "./styles.module.scss";
 
-import { ROUTES } from './Routes';
-import Logo from '../../Logo';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/RootReducer';
-import { UserState } from '../../../store/user/types';
-import { useHistory, useLocation } from 'react-router';
-import { Link } from 'react-router-dom';
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import styles from './styles.module.scss';
 interface Props {
   children: React.ReactNode;
 }
@@ -30,15 +30,15 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
   } = useSelector<RootState, UserState>((state) => state.user);
 
   useEffect(() => {
-    if (pathname === '/login' || pathname === '/') {
-      history.replace('/home');
+    if (pathname === "/login" || pathname === "/") {
+      history.replace("/home");
     }
   }, [pathname, history]);
   const makeLegalRoute = () => {
     // const methodsTest = ['POST'];
     // const routesTest = ['Products', 'Category'];
     let legalRoutes: typeof ROUTES = [];
-    if (routes[0] === 'all' && methods[0] === 'ALL') return ROUTES;
+    if (routes[0] === "all" && methods[0] === "ALL") return ROUTES;
 
     for (const route of routes) {
       ROUTES.map((item) =>
@@ -63,7 +63,8 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
       <SubMenu
         key={item.route}
         title={item.route}
-        icon={<item.icon style={{ marginRight: 10 }} />}>
+        icon={<item.icon style={{ marginRight: 10 }} />}
+      >
         {item.methods.map((method) => {
           return (
             <Menu.Item key={method.path}>
@@ -79,24 +80,27 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
     <>
       <Layout
         style={{
-          minHeight: '100vh',
-        }}>
+          minHeight: "100vh",
+        }}
+      >
         <Sider
           collapsible
           collapsed={collapsed}
           onCollapse={handleCollapsed}
-          theme='light'>
+          theme="light"
+        >
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              padding: '10px 0',
-            }}>
-            <Link to='/home'>
+              display: "flex",
+              justifyContent: "center",
+              padding: "10px 0",
+            }}
+          >
+            <Link to="/home">
               <Logo width={collapsed ? 65 : 80} height={collapsed ? 65 : 80} />
             </Link>
           </div>
-          <Menu theme='dark' mode='inline'>
+          <Menu theme="dark" mode="inline">
             {/* <Menu.Item
               icon={<UserOutlined />}
               style={{ background: '#438ad5', margin: '0' }}>
@@ -105,8 +109,9 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
             {makeRoute(makeLegalRoute())}
             <Menu.Item
               icon={<LogoutOutlined />}
-              style={{ background: '#438ad5', margin: '0' }}>
-              <Link to='/logout'>Logout</Link>
+              style={{ background: "#438ad5", margin: "0" }}
+            >
+              <Link to="/logout">Logout</Link>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -114,21 +119,23 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
           <Header
             style={{
               boxShadow:
-                '0 1px 2px -2px rgb(117 117 117 / 16%), 0 3px 6px 0 rgb(34 33 33 / 12%), 0 0px 8px 0px rgb(78 78 78 / 90%)',
-            }}>
-            <Row style={{ height: '100%' }}>
+                "0 1px 2px -2px rgb(117 117 117 / 16%), 0 3px 6px 0 rgb(34 33 33 / 12%), 0 0px 8px 0px rgb(78 78 78 / 90%)",
+            }}
+          >
+            <Row style={{ height: "100%" }}>
               <Col offset={19} span={5} className={styles.avatar_container}>
-                <Link to='/account/info'>
+                <Link to="/account/info">
                   <div className={styles.avatar_group}>
-                    <Avatar size='small' icon={<UserOutlined />} />
+                    <Avatar size="small" icon={<UserOutlined />} />
                     {info.fullname && (
                       <Typography.Text
                         style={{
                           marginLeft: 10,
                           fontWeight: 500,
 
-                          overflow: 'hidden',
-                        }}>
+                          overflow: "hidden",
+                        }}
+                      >
                         {info.fullname}
                       </Typography.Text>
                     )}
@@ -138,13 +145,13 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
             </Row>
           </Header>
 
-          <Breadcrumb style={{ margin: '15px 30px' }} separator='>'>
+          <Breadcrumb style={{ margin: "15px 30px" }} separator=">">
             {pathname.length === 1
               ? null
-              : pathname === '/home'
+              : pathname === "/home"
               ? null
-              : pathname.split('/').map((item, index) =>
-                  item === '' ? null : (
+              : pathname.split("/").map((item, index) =>
+                  item === "" ? null : (
                     <Breadcrumb.Item key={index}>
                       <strong>{item}</strong>
                     </Breadcrumb.Item>
@@ -152,14 +159,15 @@ const WrappedLayout: React.FC<Props> = ({ children }) => {
                 )}
           </Breadcrumb>
 
-          <Content style={{ margin: '0 30px' }}>{children}</Content>
+          <Content style={{ margin: "0 30px" }}>{children}</Content>
           <Footer
             style={{
               height: 48,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             ADMIN PANEL
           </Footer>
         </Layout>

@@ -1,5 +1,5 @@
-import { Reducer } from 'redux';
-import { RoleAction, RoleState, RoleType, RoleTypes } from './types';
+import { Reducer } from "redux";
+import { RoleAction, RoleState, RoleType, RoleTypes } from "./types";
 
 const initialState: RoleState = {
   loading: false,

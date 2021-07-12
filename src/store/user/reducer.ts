@@ -1,12 +1,12 @@
-import { Reducer } from 'redux';
-import { UserAction, UserState, UserType, UserTypes } from './types';
+import { Reducer } from "redux";
+import { UserAction, UserState, UserType, UserTypes } from "./types";
 
 const initialState: UserState = {
   edit_permission: false,
   loading: false,
   role: {
-    id: '',
-    name: '',
+    id: "",
+    name: "",
   },
   isAuthenticated: false,
   permissions: {
@@ -16,11 +16,11 @@ const initialState: UserState = {
   list: [],
   user: {
     info: {
-      _id: '',
-      fullname: '',
-      email: '',
+      _id: "",
+      fullname: "",
+      email: "",
       isActive: false,
-      role: '',
+      role: "",
       createdAt: null,
       updatedAt: null,
     },

@@ -1,3 +1,4 @@
+
 import { EditOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import {
   Table,
@@ -27,6 +28,7 @@ import Label from '../../common/Label';
 import getBase64 from '../../../utils/getBase64';
 import { UpdateProduct } from '../../../store/product/actions';
 import { UserState } from '../../../store/user/types';
+
 
 // import WrappedAuth from '../WrappedAuth';
 // import WrappedLayout from '../WrappedLayout';
@@ -106,62 +108,64 @@ const ListProduct: FC = () => {
   };
   const Columns: ColumnsType<ProductType> = [
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Name</p>,
-      dataIndex: 'name',
-      width: '25%',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Name</p>,
+      dataIndex: "name",
+      width: "25%",
       render: (name) => (
-        <p style={{ textAlign: 'center', margin: 0 }}>{name}</p>
+        <p style={{ textAlign: "center", margin: 0 }}>{name}</p>
       ),
-      key: 'name',
+      key: "name",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Categories</p>,
-      dataIndex: 'categories',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Categories</p>,
+      dataIndex: "categories",
       render: (categories: CategoryType[]) => {
         return (
           <>
             {categories.map((category) => (
-              <Tag color='geekblue' key={category._id}>
+              <Tag color="geekblue" key={category._id}>
                 {category.name}
               </Tag>
             ))}
           </>
         );
       },
-      width: '45%',
-      key: 'categories',
+      width: "45%",
+      key: "categories",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Instock</p>,
-      dataIndex: 'instock',
-      width: '15%',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Instock</p>,
+      dataIndex: "instock",
+      width: "15%",
       render: (instock: string) => (
         <Text
           style={{
-            textAlign: 'center',
-            width: '100%',
-            display: 'inline-block',
-          }}>
+            textAlign: "center",
+            width: "100%",
+            display: "inline-block",
+          }}
+        >
           {instock}
         </Text>
       ),
-      key: 'instock',
+      key: "instock",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Price</p>,
-      dataIndex: 'price',
-      width: '15%',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Price</p>,
+      dataIndex: "price",
+      width: "15%",
       render: (price: string) => (
         <Text
           style={{
-            textAlign: 'center',
-            width: '100%',
-            display: 'inline-block',
-          }}>
+            textAlign: "center",
+            width: "100%",
+            display: "inline-block",
+          }}
+        >
           {price}
         </Text>
       ),
-      key: 'price',
+      key: "price",
     },
     {
       title: <p style={{ textAlign: 'center', margin: 0 }}>Action</p>,
@@ -205,7 +209,7 @@ const ListProduct: FC = () => {
             //   setVisible(true);
             // },
             style: {
-              cursor: 'pointer',
+              cursor: "pointer",
             },
           };
         }}
@@ -216,23 +220,26 @@ const ListProduct: FC = () => {
         onCancel={() => setVisible(false)}
         visible={visible}
         // title={product?.name}
-        className='ant-footer-modal_custom'
+        className="ant-footer-modal_custom"
         title={
-          <p style={{ textAlign: 'center', marginBottom: 0 }}>
+          <p style={{ textAlign: "center", marginBottom: 0 }}>
             {product?.name}
           </p>
         }
         footer={<></>}
-        okButtonProps={{ style: { display: 'none' } }}
-        cancelButtonProps={{ style: { display: 'none' } }}>
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
         {product && (
           <>
             <img
               style={{
+
                 width: '20%',
                 height: '20%',
                 display: 'block',
                 margin: '0 auto',
+
                 marginBottom: 15,
               }}
               src={
@@ -242,6 +249,7 @@ const ListProduct: FC = () => {
               }
               alt={product.featuredImg}
             />
+
             <Form
               onFinish={handleFinish}
               form={form}
@@ -371,6 +379,7 @@ const ListProduct: FC = () => {
                 </Button>
               </Form.Item>
             </Form>
+
           </>
         )}
       </Modal>

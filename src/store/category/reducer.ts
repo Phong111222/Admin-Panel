@@ -1,10 +1,10 @@
-import { Reducer } from 'redux';
+import { Reducer } from "redux";
 import {
   CategoryAction,
   CategoryState,
   CategoryType,
   CategoryTypes,
-} from './types';
+} from "./types";
 
 const inititalState: CategoryState = {
   loading: false,

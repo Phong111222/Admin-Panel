@@ -1,5 +1,5 @@
-import { Reducer } from 'redux';
-import { StaffActions, StaffState, StaffType, StaffTypes } from './types';
+import { Reducer } from "redux";
+import { StaffActions, StaffState, StaffType, StaffTypes } from "./types";
 
 const initialState: StaffState = {
   loading: false,

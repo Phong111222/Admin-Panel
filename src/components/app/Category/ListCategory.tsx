@@ -1,3 +1,4 @@
+
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategoryState, CategoryType } from '../../../store/category/types';
@@ -16,6 +17,7 @@ import Modal from 'antd/lib/modal/Modal';
 import Label from '../../common/Label';
 import { useState } from 'react';
 import { useEffect } from 'react';
+
 const ListCategories: FC = () => {
   const [form] = useForm();
   const dispatch = useDispatch();
@@ -24,8 +26,8 @@ const ListCategories: FC = () => {
   const handleToggle = async (_id: string) => {
     dispatch(ToggleCategory(_id as string));
     const token =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem('token')
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("token")
         : null;
     await AxiosConfig.patch(Category.GET_AND_TOGGLE_BY_ID(_id), null, {
       headers: {
@@ -35,39 +37,44 @@ const ListCategories: FC = () => {
   };
   const columns = [
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Name</p>,
-      dataIndex: 'name',
-      key: 'name',
+      title: <p style={{ textAlign: "center", margin: 0 }}>Name</p>,
+      dataIndex: "name",
+      key: "name",
       render: (text: string) => (
         <p
           style={{
             fontSize: 15,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             margin: 0,
-            textAlign: 'center',
-          }}>
+            textAlign: "center",
+          }}
+        >
           {text}
         </p>
       ),
-      width: '50%',
+      width: "50%",
     },
     {
-      title: <p style={{ textAlign: 'center', margin: 0 }}>Active</p>,
+       title: <p style={{ textAlign: 'center', margin: 0 }}>Active</p>,
       dataindex: 'isActive',
       key: 'isActive',
       render: (record: CategoryType) => {
+
         return (
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Button
+
               onClick={() => handleToggle(record._id as string)}
               type='primary'
               danger={!record.isActive}>
               {record.isActive ? 'Active' : 'inActive'}
+
             </Button>
             <Button
               style={{ marginLeft: 5 }}
@@ -77,7 +84,7 @@ const ListCategories: FC = () => {
           </div>
         );
       },
-      width: '50%',
+      width: "50%",
     },
   ];
   const { list, loading } = useSelector<RootState, CategoryState>(
@@ -104,7 +111,7 @@ const ListCategories: FC = () => {
   return (
     <>
       <Table
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         dataSource={newList}
         columns={columns}
         pagination={{ pageSize: 7 }}
