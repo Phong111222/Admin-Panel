@@ -41,23 +41,19 @@ export const Role = {
 };
 
 export const Analytic = {
-
-  GET_TOTAL: '/analytic/total',
+  GET_TOTAL: "/analytic/total",
   GET_MONTHLY_REVENUE_BY_YEAR: (year: string | number) =>
     `/analytic/revenue/${year}`,
-  GET_RANK_STAFF: '/analytic/rankStaff',
-  GET_RANK_PRODUCT: '/analytic/rankProduct',
-
+  GET_RANK_STAFF: "/analytic/rankStaff",
+  GET_RANK_PRODUCT: "/analytic/rankProduct",
 };
 
-
 export const Invoice = {
-  LIST_INVOICE: '/invoice',
+  LIST_INVOICE: "/invoice",
   GET_BY_ID: (id: string) => `/invoice/${id}`,
   CONFIRM: (id: string) => `/invoice/confirm/${id}`,
 };
 
-export const methods = ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'];
-export const permissions = ['category', 'role', 'product', 'staff', 'invoice'];
-
-
+export const methods = ["GET", "PUT", "POST", "PATCH", "DELETE"];
+export const permissions = ["category", "role", "product", "staff", "invoice"];
+export const ONESIGNAL_APPID = "2c0210e7-9ef1-4e9d-a646-7e601d8c15f8";

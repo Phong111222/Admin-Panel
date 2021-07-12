@@ -193,15 +193,15 @@ const routes: type[] = [
     exact: true,
   },
   {
-    name: 'Invoice',
+    name: "Invoice",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Invoice/InvoiceList'),
+        import("../components/app/Invoice/InvoiceList"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/invoice/list',
-    id: 'invoice_list',
+    path: "/invoice/list",
+    id: "invoice_list",
     exact: false,
   },
 ];
