@@ -44,7 +44,7 @@ const Login: React.FC = () => {
   }, [dispatch]);
   return (
     <>
-      <div style={{ background: '#297dd6', minHeight: '100vh' }}>
+      <div style={{ background: '#297dd6', minHeight: '100%' }}>
         <Row justify='center' align='middle' style={{ height: '100vh' }}>
           <Col {...colResponsive}>
             <Card

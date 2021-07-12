@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import WrappedAuth from '../components/app/WrappedAuth';
 import Loading from '../components/common/loading';
 
 interface type {
@@ -193,15 +194,15 @@ const routes: type[] = [
     exact: true,
   },
   {
-    name: "Invoice",
+    name: 'Invoice',
     component: React.lazy(() =>
       Promise.all([
-        import("../components/app/Invoice/InvoiceList"),
+        import('../components/app/Invoice/InvoiceList'),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: "/invoice/list",
-    id: "invoice_list",
+    path: '/invoice/list',
+    id: 'invoice_list',
     exact: false,
   },
 ];
@@ -215,7 +216,11 @@ const MakeRoute = () => {
             exact={route.exact || false}
             path={route.path}
             key={route.id}
-            component={() => <route.component />}
+            component={() => (
+              <WrappedAuth>
+                <route.component />
+              </WrappedAuth>
+            )}
           />
         ))}
         ))
