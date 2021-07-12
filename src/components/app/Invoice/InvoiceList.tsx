@@ -229,10 +229,11 @@ const InvoiceList = () => {
                     type='primary'
                     disabled={selectedInvoice?.isConfirm}
                     loading={loading}
+                    shape='circle'
                     style={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: '50%',
+                      // width: 60,
+                      // height: 60,
+                      // borderRadius: '50%',
                       boxShadow:
                         '0 1px 2px -2px rgb(0 0 0 / 16%), 0 3px 6px 0 rgb(0 0 0 / 12%), 0 5px 12px 4px rgb(0 0 0 / 9%)',
                     }}

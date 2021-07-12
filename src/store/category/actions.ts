@@ -1,7 +1,11 @@
-import { Dispatch } from "redux";
-import { getHttpRequest } from "../../utils/api";
-import { Category } from "../../utils/contanst";
-import { CategoryAction, CategoryType, CategoryTypes } from "./types";
+
+import { notification } from 'antd';
+import { Dispatch } from 'redux';
+import AxiosConfig from '../../config/axiosConfig';
+import { getHttpRequest } from '../../utils/api';
+import { Category } from '../../utils/contanst';
+import { CategoryAction, CategoryType, CategoryTypes } from './types';
+
 
 export const GetListCategories = () => async (
   dispatch: Dispatch<CategoryAction>
@@ -68,3 +72,54 @@ export const CreateCategoryFail = (error: any): CategoryAction => ({
     error,
   },
 });
+
+export const UpdateCategory =
+  (categoryID: string, data: any, cb: Function) =>
+  async (dispatch: Dispatch<CategoryAction>) => {
+    try {
+      dispatch({
+        type: CategoryTypes.UPDATE_CATEGORY,
+      });
+      const token =
+        (typeof window !== 'undefined' &&
+          window.localStorage.getItem('token')) ||
+        null;
+      const {
+        data: {
+          data: { updatedCategory },
+        },
+      } = await AxiosConfig.patch(Category.UPDATE(categoryID), data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      notification.success({
+        message: 'SUCCESS',
+        duration: 3,
+        description: 'Update category success',
+        onClose: () => notification.destroy(),
+      });
+      cb();
+      dispatch({
+        type: CategoryTypes.UPDATE_CATEGORY_SUCCESS,
+        payload: {
+          newCategory: updatedCategory,
+          categoryID,
+        },
+      });
+    } catch (error) {
+      notification.error({
+        message: 'ERROR',
+        duration: 3,
+        description: 'Update category fail',
+        onClose: () => notification.destroy(),
+      });
+      dispatch({
+        type: CategoryTypes.UPDATE_CATEGORY_FAIL,
+        payload: {
+          error: error.response,
+        },
+      });
+    }
+  };

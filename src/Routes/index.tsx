@@ -56,9 +56,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/product/list",
     id: "products_list",
     exact: true,
+
   },
   {
     name: "product",
@@ -68,9 +70,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/product/create",
     id: "products_create",
     exact: true,
+
   },
   {
     name: "category",
@@ -80,9 +84,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/category/list",
     id: "category_list",
     exact: true,
+
   },
   {
     name: "category",
@@ -92,9 +98,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/category/create",
     id: "category_create",
     exact: true,
+
   },
   {
     name: "role",
@@ -104,9 +112,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/role/list",
     id: "role_create",
     exact: true,
+
   },
   {
     name: "role",
@@ -116,9 +126,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/role/create",
     id: "role_list",
     exact: true,
+
   },
   {
     name: "account",
@@ -128,9 +140,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/account/info",
     id: "account_info",
     exact: true,
+
   },
   {
     name: "user",
@@ -140,9 +154,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/user/list",
     id: "user_list",
     exact: true,
+
   },
   {
     name: "user",
@@ -152,10 +168,13 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/user/create",
     id: "user_create",
     exact: true,
+
   },
+
   {
     name: "staff",
     component: React.lazy(() =>
@@ -164,9 +183,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/staff/create",
     id: "staff_create",
     exact: true,
+
   },
   {
     name: "staff",
@@ -176,9 +197,11 @@ const routes: type[] = [
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
+
     path: "/staff/list",
     id: "staff_list",
     exact: true,
+
   },
   {
     name: 'Invoice',
@@ -190,7 +213,7 @@ const routes: type[] = [
     ),
     path: '/invoice/list',
     id: 'invoice_list',
-    exact: true,
+    exact: false,
   },
 ];
 

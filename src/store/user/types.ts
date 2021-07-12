@@ -1,14 +1,19 @@
 export const UserTypes = {
-  GET_USER: "user/GET_USER_INFO",
-  GET_USER_COMPLETE: "user/GET_USER_COMPLETE",
-  RESET_USER: "user/RESET_USER",
-  GET_USER_LIST: "user/GET_USER_LIST",
-  GET_USER_LIST_SUCCESS: "user/GET_USER_LIST_SUCCESS",
-  GET_USER_LIST_FAIL: "user/GET_USER_LIST_FAIL",
-  CREATE_USER: "user/CREATE_USER",
-  CREATE_USER_SUCCESS: "user/CREATE_USER_SUCCESS",
-  CREATE_USER_FAIL: "user/CREATE_USER_FAIL",
-  TOGGLE_USER: "user/TOGGLE_USER",
+
+  GET_USER: 'user/GET_USER_INFO',
+  GET_USER_COMPLETE: 'user/GET_USER_COMPLETE',
+  RESET_USER: 'user/RESET_USER',
+  GET_USER_LIST: 'user/GET_USER_LIST',
+  GET_USER_LIST_SUCCESS: 'user/GET_USER_LIST_SUCCESS',
+  GET_USER_LIST_FAIL: 'user/GET_USER_LIST_FAIL',
+  CREATE_USER: 'user/CREATE_USER',
+  CREATE_USER_SUCCESS: 'user/CREATE_USER_SUCCESS',
+  CREATE_USER_FAIL: 'user/CREATE_USER_FAIL',
+  TOGGLE_USER: 'user/TOGGLE_USER',
+  UPDATE_USER: 'user/UPDATE_USER',
+  UPDATE_USER_SUCCESS: 'user/UPDATE_USER_SUCCESS',
+  UPDATE_USER_FAIL: 'user/UPDATE_USER_FAIL',
+
 };
 
 export interface UserType {
@@ -21,6 +26,7 @@ export interface UserType {
   updatedAt: any;
 }
 export interface UserState {
+  edit_permission: boolean;
   loading: boolean;
   list: UserType[];
   role: {
@@ -61,7 +67,10 @@ export interface UserAction {
     | typeof UserTypes.GET_USER_LIST_FAIL
     | typeof UserTypes.GET_USER_LIST_SUCCESS
     | typeof UserTypes.RESET_USER
-    | typeof UserTypes.TOGGLE_USER;
+    | typeof UserTypes.TOGGLE_USER
+    | typeof UserTypes.UPDATE_USER
+    | typeof UserTypes.UPDATE_USER_FAIL
+    | typeof UserTypes.UPDATE_USER_SUCCESS;
 
   payload?: UserPayload;
 }

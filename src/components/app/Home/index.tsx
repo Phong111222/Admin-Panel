@@ -17,6 +17,7 @@ import {
 import { RootState } from '../../../store/RootReducer';
 import { AnalyticState } from '../../../store/analytics/types';
 import { getListInvoice } from '../../../store/invoice/actions';
+import { useMemo } from 'react';
 
 
 const years = [2021, 2022, 2023, 2024];
@@ -52,7 +53,14 @@ const Home: FC = () => {
   const handleGetRevenueByYear = (year: number) => {
     dispatch(getRevenueByYear(year));
   };
-
+  const listTop5RankedStaff = useMemo(() => {
+    const newList: typeof listRankedStaff = [];
+    for (let i = 0; i < 5; i++) {
+      newList.push(listRankedStaff[i]);
+    }
+    return newList;
+    // eslint-disable-next-line
+  }, []);
   return (
     <>
       <Row>
@@ -137,12 +145,14 @@ const Home: FC = () => {
               </Typography.Title>
               {(() => {
                 const data = {
-                  labels: listRankedStaff.map(
+                  labels: listTop5RankedStaff.map(
                     (staff) => `${staff.firstname} ${staff.lastname}`
                   ),
                   datasets: [
                     {
-                      data: listRankedStaff.map((staff) => staff.revenueMake),
+                      data: listTop5RankedStaff.map(
+                        (staff) => staff.revenueMake
+                      ),
                       backgroundColor: ['#3781cc'],
                     },
                   ],
@@ -152,7 +162,7 @@ const Home: FC = () => {
             </Col>
             <Col offset={2} span={11}>
               <Typography.Title level={4} style={{ textAlign: 'center' }}>
-                LIST RANKED STAFFS
+                LIST RANKED PRODUCTS
               </Typography.Title>
               {(() => {
                 const data = {

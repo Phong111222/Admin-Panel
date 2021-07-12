@@ -44,6 +44,20 @@ const categoryReducer: Reducer<CategoryState, CategoryAction> = (
     }
     case CategoryTypes.CREATE_CATEGORY_FAIL:
       return { ...state, loading: false, error: action.payload?.error };
+    case CategoryTypes.UPDATE_CATEGORY:
+      return { ...state, loading: true };
+    case CategoryTypes.UPDATE_CATEGORY_FAIL:
+      return { ...state, loading: false, error: action.payload?.error };
+    case CategoryTypes.UPDATE_CATEGORY_SUCCESS: {
+      const updatedCategory = action.payload?.newCategory;
+
+      const newList = state.list.map((category) =>
+        category._id === action.payload?.categoryID
+          ? { ...category, ...updatedCategory }
+          : category
+      );
+      return { ...state, loading: false, list: newList };
+    }
     default:
       return state;
   }
