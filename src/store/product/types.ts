@@ -7,6 +7,11 @@ export const ProductTypes = {
   CREATE_PRODUCT: 'product/CREATE_PRODUCT',
   CREATE_PRODUCT_SUCCESS: 'product/CREATE_PRODUCT_SUCCESS',
   CREATE_PRODUCT_FAIL: 'product/CREATE_PRODUCT_FAIL',
+  UPDATE_PRODUCT: 'product/UPDATE_PRODUCT',
+
+  UPDATE_PRODUCT_FAIL: 'product/UPDATE_PRODUCT_FAIL',
+
+  UPDATE_PRODUCT_SUCCESS: 'product/UPDATE_PRODUCT_SUCCESS',
 };
 
 export interface ProductType {
@@ -30,6 +35,7 @@ export interface ProductPayload {
   list?: ProductType[];
   error?: any;
   newProduct?: ProductType;
+  productID?: string;
 }
 
 export interface ProductActions {
@@ -39,6 +45,9 @@ export interface ProductActions {
     | typeof ProductTypes.CREATE_PRODUCT_SUCCESS
     | typeof ProductTypes.GET_LIST_PRODUCTS
     | typeof ProductTypes.GET_LIST_PRODUCTS_FAIL
-    | typeof ProductTypes.GET_LIST_PRODUCTS_SUCCESS;
+    | typeof ProductTypes.UPDATE_PRODUCT
+    | typeof ProductTypes.GET_LIST_PRODUCTS_SUCCESS
+    | typeof ProductTypes.UPDATE_PRODUCT_FAIL
+    | typeof ProductTypes.UPDATE_PRODUCT_SUCCESS;
   payload?: ProductPayload;
 }

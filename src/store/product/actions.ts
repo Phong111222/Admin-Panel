@@ -4,6 +4,7 @@ import { getHttpRequest, postHttp } from '../../utils/api';
 import { Product } from '../../utils/contanst';
 import { ProductActions, ProductTypes } from './types';
 import { notification } from 'antd';
+import AxiosConfig from '../../config/axiosConfig';
 
 const fieldNames = [
   'name',
@@ -104,6 +105,57 @@ export const createProduct =
         type: ProductTypes.CREATE_PRODUCT_FAIL,
         payload: {
           error: message[fieldNames[index]] || 'ERROR',
+        },
+      });
+    }
+  };
+
+export const UpdateProduct =
+  (formData: FormData, id: string, cb: Function) =>
+  async (dispatch: Dispatch<ProductActions>) => {
+    try {
+      dispatch({
+        type: ProductTypes.UPDATE_PRODUCT,
+      });
+      const token =
+        (typeof window !== 'undefined' &&
+          window.localStorage.getItem('token')) ||
+        null;
+      const {
+        data: {
+          data: { updatedProduct },
+        },
+      } = await AxiosConfig.patch(Product.UPDATE(id), formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      notification.success({
+        message: 'SUCCESS',
+        duration: 3,
+        description: 'Update product success',
+        onClose: () => notification.destroy(),
+      });
+      cb();
+      dispatch({
+        type: ProductTypes.UPDATE_PRODUCT_SUCCESS,
+        payload: {
+          newProduct: updatedProduct,
+          productID: id,
+        },
+      });
+    } catch (error) {
+      notification.error({
+        message: 'ERROR',
+        duration: 3,
+        description: 'Update product fail',
+        onClose: () => notification.destroy(),
+      });
+      dispatch({
+        type: ProductTypes.CREATE_PRODUCT_FAIL,
+        payload: {
+          error: error.response,
         },
       });
     }

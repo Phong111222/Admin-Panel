@@ -6,6 +6,9 @@ export const CategoryTypes = {
   CREATE_CATEOGRY: 'category/CREATE_CATEGORY',
   CREATE_CATEGORY_FAIL: 'category/CREATE_CATEGORY_FAIL',
   CREATE_CATEGORY_SUCCESS: 'category/CREATE_CATEGORY_SUCCESS',
+  UPDATE_CATEGORY: 'category/UPDATE_CATEGORY',
+  UPDATE_CATEGORY_SUCCESS: 'category/UPDATE_CATEGORY_SUCCESS',
+  UPDATE_CATEGORY_FAIL: 'category/UPDATE_CATEGORY_FAIL',
 };
 
 export interface CategoryType {
@@ -36,6 +39,9 @@ export interface CategoryAction {
     | typeof CategoryTypes.GET_LIST_CATEGORIES_SUCCESS
     | typeof CategoryTypes.CREATE_CATEGORY_FAIL
     | typeof CategoryTypes.CREATE_CATEGORY_SUCCESS
-    | typeof CategoryTypes.CREATE_CATEOGRY;
+    | typeof CategoryTypes.CREATE_CATEOGRY
+    | typeof CategoryTypes.UPDATE_CATEGORY
+    | typeof CategoryTypes.UPDATE_CATEGORY_FAIL
+    | typeof CategoryTypes.UPDATE_CATEGORY_SUCCESS;
   payload?: CategoryPayload;
 }

@@ -36,6 +36,20 @@ const productReducer: Reducer<ProductState, ProductActions> = (
     }
     case ProductTypes.CREATE_PRODUCT_FAIL:
       return { ...state, loading: false, error: action.payload?.error };
+    case ProductTypes.UPDATE_PRODUCT:
+      return { ...state, loading: true };
+    case ProductTypes.UPDATE_PRODUCT_FAIL:
+      return { ...state, loading: false, error: action.payload?.error };
+    case ProductTypes.UPDATE_PRODUCT_SUCCESS: {
+      const updatedproduct = action.payload?.newProduct;
+      console.log(updatedproduct);
+      const newList = state.list.map((product) =>
+        product._id === action.payload?.productID
+          ? { ...product, ...updatedproduct }
+          : product
+      );
+      return { ...state, loading: false, list: newList };
+    }
     default:
       return state;
   }
