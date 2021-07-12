@@ -1,4 +1,3 @@
-
 import { FormInstance } from 'antd';
 import { Dispatch } from 'redux';
 import { getHttpRequest, postHttp } from '../../utils/api';
@@ -6,57 +5,57 @@ import { Product } from '../../utils/contanst';
 import { ProductActions, ProductTypes } from './types';
 import { notification } from 'antd';
 import AxiosConfig from '../../config/axiosConfig';
+import { RootState } from '../RootReducer';
+import { CategoryType } from '../category/types';
 
 const fieldNames = [
-  "name",
-  "featuredImg",
-  "categories",
-  "price",
-  "instock",
-  "description",
+  'name',
+  'featuredImg',
+  'categories',
+  'price',
+  'instock',
+  'description',
 ];
 
-export const GetListProducts = () => async (
-  dispatch: Dispatch<ProductActions>
-) => {
-  try {
-    dispatch({
-      type: ProductTypes.GET_LIST_PRODUCTS,
-    });
-    const token =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("token") || null
-        : null;
-    const {
-      data: {
-        data: { products: list },
-      },
-    } = await getHttpRequest(Product.LIST_PRODUCTS_CREATE_PRODUCT, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+export const GetListProducts =
+  () => async (dispatch: Dispatch<ProductActions>) => {
+    try {
+      dispatch({
+        type: ProductTypes.GET_LIST_PRODUCTS,
+      });
+      const token =
+        typeof window !== 'undefined'
+          ? window.localStorage.getItem('token') || null
+          : null;
+      const {
+        data: {
+          data: { products: list },
+        },
+      } = await getHttpRequest(Product.LIST_PRODUCTS_CREATE_PRODUCT, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    dispatch({
-      type: ProductTypes.GET_LIST_PRODUCTS_SUCCESS,
-      payload: {
-        list,
-      },
-    });
-  } catch (error) {
-    dispatch({
-      type: ProductTypes.GET_LIST_PRODUCTS_FAIL,
-      payload: {
-        error: error.response,
-      },
-    });
-  }
-};
-
+      dispatch({
+        type: ProductTypes.GET_LIST_PRODUCTS_SUCCESS,
+        payload: {
+          list,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: ProductTypes.GET_LIST_PRODUCTS_FAIL,
+        payload: {
+          error: error.response,
+        },
+      });
+    }
+  };
 
 export const createProduct =
   (formData: FormData, form: FormInstance, cb: Function) =>
-  async (dispatch: Dispatch<ProductActions>) => {
+  async (dispatch: Dispatch<ProductActions>, getState: () => RootState) => {
     try {
       dispatch({
         type: ProductTypes.CREATE_PRODUCT,
@@ -66,12 +65,29 @@ export const createProduct =
           window.localStorage.getItem('token')) ||
         null;
       const {
-        data: { newProduct },
+        data: {
+          data: { newProduct },
+        },
       } = await postHttp(Product.LIST_PRODUCTS_CREATE_PRODUCT, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      const {
+        category: { list: listCategories },
+      } = getState();
+
+      const newArrCate: CategoryType[] = [];
+      newProduct.categories.forEach((ele: string) => {
+        const existedCate = listCategories.find((item) => item._id === ele);
+
+        if (existedCate) {
+          newArrCate.push(existedCate);
+        }
+      });
+      newProduct.categories = newArrCate;
+
       form.resetFields(fieldNames);
       cb();
       notification.success({
@@ -115,7 +131,7 @@ export const createProduct =
 
 export const UpdateProduct =
   (formData: FormData, id: string, cb: Function) =>
-  async (dispatch: Dispatch<ProductActions>) => {
+  async (dispatch: Dispatch<ProductActions>, getState: () => RootState) => {
     try {
       dispatch({
         type: ProductTypes.UPDATE_PRODUCT,
@@ -133,6 +149,19 @@ export const UpdateProduct =
           Authorization: `Bearer ${token}`,
         },
       });
+
+      const {
+        category: { list: listCategories },
+      } = getState();
+
+      const newArrCate: CategoryType[] = [];
+      updatedProduct.categories.forEach((ele: string) => {
+        const existedCate = listCategories.find((item) => item._id === ele);
+        if (existedCate) {
+          newArrCate.push(existedCate);
+        }
+      });
+      updatedProduct.categories = newArrCate;
 
       notification.success({
         message: 'SUCCESS',
