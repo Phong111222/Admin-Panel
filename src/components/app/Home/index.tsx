@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +17,6 @@ import { RootState } from '../../../store/RootReducer';
 import { AnalyticState } from '../../../store/analytics/types';
 import { getListInvoice } from '../../../store/invoice/actions';
 import { useMemo } from 'react';
-
 
 const years = [2021, 2022, 2023, 2024];
 
@@ -146,12 +144,12 @@ const Home: FC = () => {
               {(() => {
                 const data = {
                   labels: listTop5RankedStaff.map(
-                    (staff) => `${staff.firstname} ${staff.lastname}`
+                    (staff) => `${staff?.firstname} ${staff?.lastname}`
                   ),
                   datasets: [
                     {
                       data: listTop5RankedStaff.map(
-                        (staff) => staff.revenueMake
+                        (staff) => staff?.revenueMake
                       ),
                       backgroundColor: ['#3781cc'],
                     },
