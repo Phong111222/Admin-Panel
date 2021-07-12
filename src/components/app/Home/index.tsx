@@ -17,6 +17,8 @@ import { RootState } from '../../../store/RootReducer';
 import { AnalyticState } from '../../../store/analytics/types';
 import { getListInvoice } from '../../../store/invoice/actions';
 import { useMemo } from 'react';
+import { useState } from 'react';
+import Loading from '../../common/loading';
 
 const years = [2021, 2022, 2023, 2024];
 
@@ -34,8 +36,9 @@ const options = {
 };
 const Home: FC = () => {
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
+    setLoading(true);
     dispatch(getListInvoice());
     dispatch(GetListCategories());
     dispatch(GetListProducts());
@@ -44,6 +47,7 @@ const Home: FC = () => {
     dispatch(GetStaffList());
     dispatch(getDataAnalytic());
     dispatch(resetRevenue());
+    setLoading(false);
   }, [dispatch]);
 
   const { total, listRankedProduct, listRankedStaff, monthRevenue } =
@@ -58,7 +62,8 @@ const Home: FC = () => {
     }
     return newList;
     // eslint-disable-next-line
-  }, []);
+  }, [loading]);
+  if (loading) return <Loading />;
   return (
     <>
       <Row>
