@@ -60,7 +60,6 @@ const routes: type[] = [
     path: "/product/list",
     id: "products_list",
     exact: true,
-
   },
   {
     name: "product",
@@ -74,7 +73,6 @@ const routes: type[] = [
     path: "/product/create",
     id: "products_create",
     exact: true,
-
   },
   {
     name: "category",
@@ -88,7 +86,6 @@ const routes: type[] = [
     path: "/category/list",
     id: "category_list",
     exact: true,
-
   },
   {
     name: "category",
@@ -102,7 +99,6 @@ const routes: type[] = [
     path: "/category/create",
     id: "category_create",
     exact: true,
-
   },
   {
     name: "role",
@@ -116,7 +112,6 @@ const routes: type[] = [
     path: "/role/list",
     id: "role_create",
     exact: true,
-
   },
   {
     name: "role",
@@ -130,7 +125,6 @@ const routes: type[] = [
     path: "/role/create",
     id: "role_list",
     exact: true,
-
   },
   {
     name: "account",
@@ -144,7 +138,6 @@ const routes: type[] = [
     path: "/account/info",
     id: "account_info",
     exact: true,
-
   },
   {
     name: "user",
@@ -158,7 +151,6 @@ const routes: type[] = [
     path: "/user/list",
     id: "user_list",
     exact: true,
-
   },
   {
     name: "user",
@@ -172,7 +164,6 @@ const routes: type[] = [
     path: "/user/create",
     id: "user_create",
     exact: true,
-
   },
 
   {
@@ -187,7 +178,6 @@ const routes: type[] = [
     path: "/staff/create",
     id: "staff_create",
     exact: true,
-
   },
   {
     name: "staff",
@@ -201,18 +191,17 @@ const routes: type[] = [
     path: "/staff/list",
     id: "staff_list",
     exact: true,
-
   },
   {
-    name: 'Invoice',
+    name: "Invoice",
     component: React.lazy(() =>
       Promise.all([
-        import('../components/app/Invoice/InvoiceList'),
+        import("../components/app/Invoice/InvoiceList"),
         new Promise((resolve) => setTimeout(resolve, 100)),
       ]).then(([moduleExports]) => moduleExports)
     ),
-    path: '/invoice/list',
-    id: 'invoice_list',
+    path: "/invoice/list",
+    id: "invoice_list",
     exact: false,
   },
 ];
