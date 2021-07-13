@@ -87,7 +87,10 @@ const EditUser: FC<Props> = ({
         labelAlign='left'
         labelCol={{ span: 24 }}
         form={form}
-        onFinish={onFinish}>
+        onFinish={onFinish}
+        onValuesChange={(changedValues, allValues) =>
+          Number(changedValues['phone'])
+        }>
         <Row style={{ width: '80%', margin: '0 auto' }}>
           <Col
             span={24}
@@ -98,7 +101,7 @@ const EditUser: FC<Props> = ({
             }}>
             <Avatar icon={<UserOutlined />} size={50} />
           </Col>
-          <Col span={11}>
+          <Col span={24}>
             <Form.Item
               name='fullname'
               label={<Label>Fullname</Label>}
@@ -106,7 +109,7 @@ const EditUser: FC<Props> = ({
               <Input />
             </Form.Item>
           </Col>
-          <Col offset={2} span={11}>
+          <Col span={24}>
             <Form.Item
               name='email'
               label={<Label>Email</Label>}
@@ -120,37 +123,28 @@ const EditUser: FC<Props> = ({
               <Input />
             </Form.Item>
           </Col>
-          <Col span={11}>
-            <Form.Item
-              name='password'
-              label={<Label>Password</Label>}
-              rules={[
-                { required: true, message: 'Password is required' },
-                { min: 8, message: 'Password must have at least 8 characters' },
-              ]}>
-              <Input.Password />
-            </Form.Item>
-          </Col>
-          <Col offset={2} span={11}>
-            <Form.Item name='phone' label={<Label>Phone</Label>}>
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={11}>
-            <Form.Item name='birtday' label={<Label>Birthday</Label>}>
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col offset={2} span={11}>
-            <Form.Item name='company' label={<Label>Company</Label>}>
-              <Input />
-            </Form.Item>
-          </Col>
+
           <Col span={24}>
-            <Form.Item name='address' label={<Label>Address</Label>}>
-              <Input />
+            <Form.Item
+              name='phone'
+              label={<Label>Phone</Label>}
+              rules={[
+                {
+                  type: 'number',
+                  transform: (value) => Number(value),
+                  validator: (_, value, __) => {
+                    console.log(value.toString().length);
+                    if (value.toString().length !== 11) {
+                      return Promise.reject('Invalid phone number');
+                    }
+                    return Promise.resolve();
+                  },
+                },
+              ]}>
+              <Input type='number' />
             </Form.Item>
           </Col>
+
           <Col span={24}>
             <Form.Item
               name='role'
@@ -160,8 +154,17 @@ const EditUser: FC<Props> = ({
                 <Row>
                   {list.map((role) =>
                     role.isActive ? (
-                      <Col key={role._id} style={{ marginBottom: 10 }}>
-                        <Radio value={role._id}>{role.name}</Radio>
+                      <Col
+                        key={role._id}
+                        style={{
+                          marginBottom: 10,
+                        }}
+                        span={8}>
+                        <Radio
+                          style={{ display: 'flex', alignItems: 'center' }}
+                          value={role._id}>
+                          {role.name}
+                        </Radio>
                       </Col>
                     ) : null
                   )}
