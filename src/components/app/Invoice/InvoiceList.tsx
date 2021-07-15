@@ -71,12 +71,13 @@ const InvoiceList = () => {
     return renderList;
   });
   const handleConfirm = async (id: string) => {
-    dispatch(confirmInvoice(id));
+    await dispatch(confirmInvoice(id));
     setRenderList(() =>
       renderList.map((invoice) =>
         invoice._id === id ? { ...invoice, isConfirm: true } : invoice
       )
     );
+    setVisible(false);
   };
   const handleChooseInvoice = (invoice: InvoiceType) => {
     setSelectedInvoice(invoice);

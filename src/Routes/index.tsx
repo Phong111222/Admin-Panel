@@ -225,7 +225,6 @@ const MakeRoute = () => {
         ))}
         ))
       </Switch>
-      {/* {!jwt ? <Redirect from='/home' to='/login' /> : <Redirect to='/home' />} */}
     </React.Suspense>
   );
 };

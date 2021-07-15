@@ -1,8 +1,12 @@
+import { RootState } from './../RootReducer';
 import { getHttpRequest } from './../../utils/api';
 import { Dispatch } from 'redux';
 import { InvoiceAction, InvoiceTypes } from './types';
 import { Invoice } from '../../utils/contanst';
 import AxiosConfig from '../../config/axiosConfig';
+import { GetListProducts } from '../product/actions';
+import { ThunkAction } from 'redux-thunk';
+import { notification } from 'antd';
 
 export const getListInvoice =
   () => async (dispatch: Dispatch<InvoiceAction>) => {
@@ -37,7 +41,8 @@ export const getListInvoice =
   };
 
 export const confirmInvoice =
-  (id: string) => async (dispatch: Dispatch<InvoiceAction>) => {
+  (id: string): ThunkAction<void, RootState, unknown, InvoiceAction> =>
+  async (dispatch) => {
     try {
       dispatch({
         type: InvoiceTypes.CONFIRM_INVOICE,
@@ -53,6 +58,12 @@ export const confirmInvoice =
         payload: {
           invoiceID: id,
         },
+      });
+      dispatch(GetListProducts());
+      notification.success({
+        message: 'Comfirm invoice successfully',
+        duration: 2,
+        onClose: () => notification.destroy(),
       });
     } catch (error) {
       dispatch({

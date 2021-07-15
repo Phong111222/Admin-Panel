@@ -20,6 +20,13 @@ const OneSignal = window.OneSignal;
 
 const App: React.FC = () => {
   const token = useAuth();
+  if (token) {
+    const currentDate = Date.now();
+    const jwt_decoded = jwt_decode<{ exp: number; iat: number }>(token);
+    if (jwt_decoded.exp * 1000 < currentDate) {
+      window.location.replace('/logout');
+    }
+  }
   useEffect(() => {
     OneSignal.push(function () {
       OneSignal.init({
@@ -27,16 +34,10 @@ const App: React.FC = () => {
       });
     });
   }, []);
-  useEffect(() => {
-    if (token) {
-      const currentDate = Date.now();
-      const jwt_decoded = jwt_decode<{ exp: number; iat: number }>(token);
-      if (jwt_decoded.exp * 1000 < currentDate) {
-        window.location.replace('/logout');
-      }
-    }
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+
+  //   // eslint-disable-next-line
+  // }, []);
   return (
     <Provider store={store}>
       <PersistGate persistor={peristor} loading={null}>
