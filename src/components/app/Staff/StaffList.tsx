@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/RootReducer';
@@ -20,7 +19,7 @@ import { Staff } from '../../../utils/contanst';
 import EditStaff from './EditStaff';
 import { useForm } from 'antd/lib/form/Form';
 import { useHistory } from 'react-router';
-
+import { UserState } from '../../../store/user/types';
 
 const { Title, Text } = Typography;
 const pageSize = 8;
@@ -31,6 +30,9 @@ const StaffList = () => {
   const [staff, setStaff] = useState<any>(null);
   const dispatch = useDispatch();
   const { list } = useSelector<RootState, StaffState>((state) => state.staff);
+  const { edit_permission } = useSelector<RootState, UserState>(
+    (state) => state.user
+  );
   const [form] = useForm();
   const [renderList, setRenderList] = useState<StaffType[]>(() => {
     const renderList: StaffType[] = [];
@@ -45,7 +47,7 @@ const StaffList = () => {
   });
   const handleToggle = async (id: string) => {
     dispatch(ToggleStaff(id));
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem('token');
     await AxiosConfig.patch(Staff.toggle_staff(id), undefined, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -60,65 +62,65 @@ const StaffList = () => {
     setVisible(false);
   };
   const handleChooseStaff = (staff: StaffType) => {
-    setStaff(staff);
-    setVisible(true);
-    history.push(`/staff/list?id=${staff._id}`);
+    if (edit_permission) {
+      setStaff(staff);
+      setVisible(true);
+      history.push(`/staff/list?id=${staff._id}`);
+    } else {
+      return null;
+    }
   };
   const makeRenderList = (newlist: StaffType[]) => {
     setRenderList(newlist);
   };
   return (
     <>
-      <Row style={{ width: "85%", margin: "0 auto" }}>
+      <Row style={{ width: '85%', margin: '0 auto' }}>
         {renderList.map((staff, index) => (
           <Col
             key={index}
             span={12}
             // offset={}
             style={{
-              padding: "0 15px",
+              padding: '0 15px',
               marginBottom: 15,
             }}
-
             onClick={() => handleChooseStaff(staff)}>
-
             <Card hoverable style={{ borderRadius: 10 }}>
-              <Row align="middle">
+              <Row align='middle'>
                 <Col span={3}>
                   <Avatar
-                    style={{ display: "block", margin: "0 auto" }}
+                    style={{ display: 'block', margin: '0 auto' }}
                     icon={<UserOutlined />}
                     size={50}
                   />
                 </Col>
                 <Col offset={1} span={16}>
-                  <div style={{ display: "flex" }}>
+                  <div style={{ display: 'flex' }}>
                     <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
                       Name:
                     </Title>
                     <Text
                       style={{
                         marginLeft: 5,
-                      }}
-                    >{`${staff.lastname} ${staff.firstname}`}</Text>
+                      }}>{`${staff.lastname} ${staff.firstname}`}</Text>
                   </div>
-                  <div style={{ display: "flex" }}>
+                  <div style={{ display: 'flex' }}>
                     <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
                       Gender:
                     </Title>
                     <Text
                       style={{
                         marginLeft: 5,
-                      }}
-                    >{`${staff.gender}`}</Text>
+                      }}>{`${staff.gender}`}</Text>
                   </div>
-                  <div style={{ display: "flex" }}>
+                  <div style={{ display: 'flex' }}>
                     <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
                       Email:
                     </Title>
                     <Text style={{ marginLeft: 5 }}>{staff.contactEmail}</Text>
                   </div>
-                  <div style={{ display: "flex" }}>
+                  <div style={{ display: 'flex' }}>
                     <Title level={5} style={{ fontSize: 14, marginBottom: 0 }}>
                       Company:
                     </Title>
@@ -127,11 +129,10 @@ const StaffList = () => {
                 </Col>
                 <Col span={4}>
                   <Button
-                    type="primary"
+                    type='primary'
                     onClick={() => handleToggle(staff._id)}
-                    danger={!staff.isActive}
-                  >
-                    {staff.isActive ? "Active" : "InActive"}
+                    danger={!staff.isActive}>
+                    {staff.isActive ? 'Active' : 'InActive'}
                   </Button>
                 </Col>
               </Row>
