@@ -1,7 +1,6 @@
-import { CategoryType } from "../category/types";
+import { CategoryType } from '../category/types';
 
 export const ProductTypes = {
-
   GET_LIST_PRODUCTS: 'product/GET_LIST_PRODUCTS',
   GET_LIST_PRODUCTS_SUCCESS: 'product/GET_LIST_PRODUCTS_SUCCESS',
   GET_LIST_PRODUCTS_FAIL: 'product/GET_LIST_PRODUCTS_FAIL',
@@ -13,7 +12,9 @@ export const ProductTypes = {
   UPDATE_PRODUCT_FAIL: 'product/UPDATE_PRODUCT_FAIL',
 
   UPDATE_PRODUCT_SUCCESS: 'product/UPDATE_PRODUCT_SUCCESS',
-
+  TOGGLE_PRODUCT_SUCCESS: 'product/TOGGLE_PRODUCT_SUCCESS',
+  TOGGLE_PRODUCT_FAIL: 'product/TOGGLE_PRODUCT_FAIL',
+  TOGGLE_PRODUCT: 'product/TOGGLE_PRODUCT',
 };
 
 export interface ProductType {
@@ -50,6 +51,8 @@ export interface ProductActions {
     | typeof ProductTypes.UPDATE_PRODUCT
     | typeof ProductTypes.GET_LIST_PRODUCTS_SUCCESS
     | typeof ProductTypes.UPDATE_PRODUCT_FAIL
-    | typeof ProductTypes.UPDATE_PRODUCT_SUCCESS;
+    | typeof ProductTypes.UPDATE_PRODUCT_SUCCESS
+    | typeof ProductTypes.TOGGLE_PRODUCT_SUCCESS;
+
   payload?: ProductPayload;
 }

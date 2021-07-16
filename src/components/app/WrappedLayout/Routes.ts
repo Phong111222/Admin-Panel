@@ -5,60 +5,59 @@ import {
   TagOutlined,
   UserAddOutlined,
   UsergroupAddOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 export const ROUTES = [
   {
-    route: "role",
+    route: 'Role',
     icon: ContactsOutlined,
     methods: [
       {
-        httpRequest: "GET",
-        title: "Role list",
-        path: "/role/list",
+        httpRequest: 'GET',
+        title: 'Role list',
+        path: '/role/list',
       },
       {
-        httpRequest: "POST",
-        title: "Role create",
-        path: "/role/create",
+        httpRequest: 'POST',
+        title: 'Role create',
+        path: '/role/create',
       },
     ],
   },
   {
-    route: "user",
+    route: 'User',
     icon: UserAddOutlined,
     methods: [
       {
-        httpRequest: "GET",
-        title: "User list",
-        path: "/user/list",
+        httpRequest: 'GET',
+        title: 'User list',
+        path: '/user/list',
       },
       {
-        httpRequest: "POST",
-        title: "User create",
-        path: "/user/create",
+        httpRequest: 'POST',
+        title: 'User create',
+        path: '/user/create',
       },
     ],
   },
   {
-    route: "staff",
+    route: 'Staff',
     icon: UsergroupAddOutlined,
     methods: [
       {
-        httpRequest: "GET",
-        title: "Staff list",
-        path: "/staff/list",
+        httpRequest: 'GET',
+        title: 'Staff list',
+        path: '/staff/list',
       },
       {
-        httpRequest: "POST",
-        title: "Staff create",
-        path: "/staff/create",
+        httpRequest: 'POST',
+        title: 'Staff create',
+        path: '/staff/create',
       },
     ],
   },
   {
-
-    route: 'invoice',
+    route: 'Invoice',
     icon: FileOutlined,
     methods: [
       {
@@ -69,36 +68,35 @@ export const ROUTES = [
     ],
   },
   {
-    route: 'category',
+    route: 'Category',
 
-   
     icon: TagOutlined,
     methods: [
       {
-        httpRequest: "GET",
-        title: "Category list",
-        path: "/category/list",
+        httpRequest: 'GET',
+        title: 'Category list',
+        path: '/category/list',
       },
       {
-        httpRequest: "POST",
-        title: "Create category",
-        path: "/category/create",
+        httpRequest: 'POST',
+        title: 'Create category',
+        path: '/category/create',
       },
     ],
   },
   {
-    route: "product",
+    route: 'Product',
     icon: ShoppingCartOutlined,
     methods: [
       {
-        httpRequest: "GET",
-        title: "Products list",
-        path: "/product/list",
+        httpRequest: 'GET',
+        title: 'Products list',
+        path: '/product/list',
       },
       {
-        httpRequest: "POST",
-        title: "Create product",
-        path: "/product/create",
+        httpRequest: 'POST',
+        title: 'Create product',
+        path: '/product/create',
       },
     ],
   },

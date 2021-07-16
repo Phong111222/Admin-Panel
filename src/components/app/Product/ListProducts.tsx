@@ -11,6 +11,7 @@ import {
   Input,
   Upload,
   Checkbox,
+  notification,
 } from 'antd';
 
 import { ColumnsType } from 'antd/lib/table';
@@ -18,15 +19,21 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { baseURL } from '../../../config/axiosConfig';
+import AxiosConfig, { baseURL } from '../../../config/axiosConfig';
 import { useForm } from 'antd/lib/form/Form';
 import { CategoryState, CategoryType } from '../../../store/category/types';
 import { ProductState, ProductType } from '../../../store/product/types';
 import { RootState } from '../../../store/RootReducer';
 import Label from '../../common/Label';
 import getBase64 from '../../../utils/getBase64';
-import { UpdateProduct } from '../../../store/product/actions';
+import {
+  ToggleProduct,
+  ToggleProductFail,
+  ToggleProductSuccess,
+  UpdateProduct,
+} from '../../../store/product/actions';
 import { UserState } from '../../../store/user/types';
+import { Product } from '../../../utils/contanst';
 
 // import WrappedAuth from '../WrappedAuth';
 // import WrappedLayout from '../WrappedLayout';
@@ -71,7 +78,31 @@ const ListProduct: FC = () => {
     product?.name,
     form,
   ]);
-
+  const handleToggle = async (_id: string) => {
+    if (edit_permission) {
+      try {
+        dispatch(ToggleProduct());
+        const token =
+          typeof window !== 'undefined'
+            ? window.localStorage.getItem('token')
+            : null;
+        await AxiosConfig.patch(Product.TOGGLE_AND_GET_BY_ID(_id), null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        dispatch(ToggleProductSuccess(_id as string));
+      } catch (error) {
+        dispatch(ToggleProductFail(error.response));
+      }
+    } else {
+      notification.error({
+        message: 'Permission denied',
+        duration: 1,
+        onClose: () => notification.destroy(),
+      });
+    }
+  };
   const handleFinish = (values: any) => {
     values.featuredImg = image.img;
     let formData = new FormData();
@@ -129,13 +160,13 @@ const ListProduct: FC = () => {
           </>
         );
       },
-      width: '45%',
+      width: '35%',
       key: 'categories',
     },
     {
       title: <p style={{ textAlign: 'center', margin: 0 }}>Instock</p>,
       dataIndex: 'instock',
-      width: '15%',
+      width: '10%',
       render: (instock: string) => (
         <Text
           style={{
@@ -151,7 +182,7 @@ const ListProduct: FC = () => {
     {
       title: <p style={{ textAlign: 'center', margin: 0 }}>Price (VND)</p>,
       dataIndex: 'price',
-      width: '15%',
+      width: '10%',
       render: (price: string) => (
         <Text
           style={{
@@ -172,18 +203,31 @@ const ListProduct: FC = () => {
     {
       title: <p style={{ textAlign: 'center', margin: 0 }}>Action</p>,
       dataIndex: '',
-      width: '5%',
+      width: '20%',
       render: (_, record) => (
-        <Button
-          icon={<EditOutlined />}
-          onClick={() => {
-            setProduct(record);
-            setVisible(true);
-          }}
-          style={{ display: 'block', margin: '0 auto' }}
-          type='primary'
-          htmlType='button'
-          disabled={!edit_permission}></Button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Button
+            onClick={() => handleToggle(record._id as string)}
+            style={{ marginRight: 5 }}
+            type='primary'
+            danger={!record.isActive}>
+            {record.isActive ? 'Active' : 'inActive'}
+          </Button>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              setProduct(record);
+              setVisible(true);
+            }}
+            type='primary'
+            htmlType='button'
+            disabled={!edit_permission}></Button>
+        </div>
       ),
       key: 'price',
     },

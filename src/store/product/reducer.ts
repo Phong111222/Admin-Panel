@@ -1,10 +1,10 @@
-import { Reducer } from "redux";
+import { Reducer } from 'redux';
 import {
   ProductActions,
   ProductState,
   ProductType,
   ProductTypes,
-} from "./types";
+} from './types';
 
 const initialState: ProductState = {
   loading: false,
@@ -50,6 +50,19 @@ const productReducer: Reducer<ProductState, ProductActions> = (
       );
       return { ...state, loading: false, list: newList };
     }
+    case ProductTypes.TOGGLE_PRODUCT: {
+      return { ...state, loading: true };
+    }
+    case ProductTypes.TOGGLE_PRODUCT_SUCCESS: {
+      const newList = state.list.map((item) =>
+        item._id === action.payload?.productID
+          ? { ...item, isActive: !item.isActive }
+          : item
+      );
+      return { ...state, list: [...newList], loading: false };
+    }
+    case ProductTypes.TOGGLE_PRODUCT_FAIL:
+      return { ...state, loading: false, error: action.payload?.error };
     default:
       return state;
   }

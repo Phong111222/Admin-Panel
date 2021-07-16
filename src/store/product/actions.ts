@@ -192,3 +192,24 @@ export const UpdateProduct =
       });
     }
   };
+export const ToggleProductSuccess = (_id: string): ProductActions => {
+  return {
+    type: ProductTypes.TOGGLE_PRODUCT_SUCCESS,
+    payload: {
+      productID: _id,
+    },
+  };
+};
+export const ToggleProduct = (): ProductActions => {
+  return {
+    type: ProductTypes.TOGGLE_PRODUCT,
+  };
+};
+export const ToggleProductFail = (error: any): ProductActions => {
+  return {
+    type: ProductTypes.TOGGLE_PRODUCT_FAIL,
+    payload: {
+      error,
+    },
+  };
+};

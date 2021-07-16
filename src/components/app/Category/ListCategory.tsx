@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategoryState, CategoryType } from '../../../store/category/types';
 import { RootState } from '../../../store/RootReducer';
-import { Table, Button, Row, Col, Input, Form } from 'antd';
+import { Table, Button, Row, Col, Input, Form, notification } from 'antd';
 import {
   ToggleCategory,
   UpdateCategory,
@@ -27,16 +27,24 @@ const ListCategories: FC = () => {
     (state) => state.user
   );
   const handleToggle = async (_id: string) => {
-    dispatch(ToggleCategory(_id as string));
-    const token =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem('token')
-        : null;
-    await AxiosConfig.patch(Category.GET_AND_TOGGLE_BY_ID(_id), null, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    if (edit_permission) {
+      dispatch(ToggleCategory(_id as string));
+      const token =
+        typeof window !== 'undefined'
+          ? window.localStorage.getItem('token')
+          : null;
+      await AxiosConfig.patch(Category.GET_AND_TOGGLE_BY_ID(_id), null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } else {
+      notification.error({
+        message: 'Permission denied',
+        duration: 1,
+        onClose: () => notification.destroy(),
+      });
+    }
   };
   const columns = [
     {
