@@ -1,4 +1,4 @@
-import { FormInstance, notification } from "antd";
+import { FormInstance, notification } from 'antd';
 
 const ShowError = (
   error: any,
@@ -7,6 +7,7 @@ const ShowError = (
   cb: Function
 ) => {
   const { message } = error.response.data;
+
   const index = fieldNames.findIndex((ele) => ele === Object.keys(message)[0]);
   form.scrollToField(fieldNames[index]);
   form.setFields([
@@ -16,9 +17,9 @@ const ShowError = (
     },
   ]);
   notification.error({
-    message: "ERROR",
+    message: 'ERROR',
     duration: 3,
-    description: message[fieldNames[index]] || "ERROR",
+    description: message[fieldNames[index]] || message || 'ERROR',
     onClose: () => notification.destroy(),
   });
   cb();
