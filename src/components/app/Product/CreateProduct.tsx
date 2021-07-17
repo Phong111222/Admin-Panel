@@ -1,5 +1,14 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Col, Form, Input, Row, Upload } from 'antd';
+import {
+  Button,
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  notification,
+  Row,
+  Upload,
+} from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -136,6 +145,22 @@ const CreateProduct: FC = () => {
                     accept={`.jpg,.png,.PNG,.JPG`}
                     className='featuredImg_uploader'
                     showUploadList={false}
+                    beforeUpload={(file, _) => {
+                      console.log(file.size);
+                      if (file.size >= 5 * 1048576) {
+                        notification.error({
+                          message: 'Không thể upload ảnh lên',
+                          description:
+                            'Vượt quá kích thước ảnh tối đa có thể up',
+                          duration: 3,
+                          onClose: () => notification.destroy(),
+                        });
+                        return Promise.reject(
+                          'Vượt quá kích thước ảnh có thể up'
+                        );
+                      }
+                      return Promise.resolve();
+                    }}
                     onChange={(info) => {
                       const reader = new FileReader();
                       reader.readAsBinaryString(info.file.originFileObj);
