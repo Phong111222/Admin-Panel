@@ -46,7 +46,14 @@ const Columns: ColumnsType<{
     dataIndex: 'price',
     width: '33,333%',
     render: (price) => (
-      <p style={{ textAlign: 'center', margin: 0 }}>{price}</p>
+      <p style={{ textAlign: 'center', margin: 0 }}>
+        {Intl.NumberFormat('vi-VN', {
+          currency: 'VND',
+        })
+          .format(Number(price))
+          .toString()
+          .replace(/\./g, ',')}
+      </p>
     ),
     key: 'price',
   },
@@ -132,7 +139,15 @@ const InvoiceList = () => {
                     <Text
                       style={{
                         marginLeft: 5,
-                      }}>{`$${invoice.total}`}</Text>
+                      }}>
+                      {Intl.NumberFormat('vi-VN', {
+                        currency: 'VND',
+                      })
+                        .format(Number(invoice.total))
+                        .toString()
+                        .replace(/\./g, ',')}{' '}
+                      VND
+                    </Text>
                   </div>
                 </Col>
               </Row>
@@ -203,7 +218,12 @@ const InvoiceList = () => {
                     <Text
                       style={{
                         marginLeft: 5,
-                      }}>{`$${selectedInvoice?.total}`}</Text>
+                      }}>{`${Intl.NumberFormat('vi-VN', {
+                      currency: 'VND',
+                    })
+                      .format(Number(selectedInvoice?.total))
+                      .toString()
+                      .replace(/\./g, ',')} VND`}</Text>
                   </div>
                 </Col>
                 <Col span={24} style={{ marginTop: 20 }}>
